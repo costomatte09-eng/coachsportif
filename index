@@ -6,8 +6,8 @@
   <title>IRON FORGE — Parallax Hero</title>
 
   <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script images/ton-image.webp="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script images/ton-image.webp="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Google Fonts: Barlow Condensed + DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -493,7 +493,7 @@
     <!-- Image centrale -->
     <div class="island-wrapper">
       <img
-        src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=85&auto=format&fit=crop"
+        images/ton-image.webp="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=85&auto=format&fit=crop"
         alt="Athlète en deadlift — performance maximale"
         width="520"
         height="693"
