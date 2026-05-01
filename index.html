@@ -33,7 +33,7 @@
 
     html {
       font-size: 16px;
-      scroll-behavior: auto; /* GSAP gère le scroll */
+      scroll-behavior: auto;
     }
 
     body {
@@ -62,7 +62,22 @@
       background: #1a1610;
     }
 
-    /* Grain overlay */
+    /* Overlay sombre pour lisibilité du texte */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Grain overlay — au-dessus de l'overlay */
     .hero::after {
       content: '';
       position: absolute;
@@ -70,7 +85,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       opacity: 0.35;
       pointer-events: none;
-      z-index: 5;
+      z-index: 6;
     }
 
     /* ─── TITRE MASSIF EN FOND ─── */
@@ -86,16 +101,15 @@
       letter-spacing: -0.02em;
       text-transform: uppercase;
       color: transparent;
-      -webkit-text-stroke: 1.5px rgba(240, 236, 228, 0.12);
+      -webkit-text-stroke: 1.5px rgba(240, 236, 228, 0.18);
       white-space: nowrap;
       user-select: none;
-      z-index: 1;
+      z-index: 8;
       will-change: transform;
     }
 
-    /* Highlight partiel en orange */
     .hero-title span {
-      -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.25);
+      -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.35);
     }
 
     /* ─── META-DATA HAUT ─── */
@@ -137,16 +151,16 @@
       text-align: right;
     }
 
-    /* ─── IMAGE CENTRALE ─── */
+    /* ─── IMAGE PLEIN ÉCRAN ─── */
     .island-wrapper {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(520px, 80vw);
-      aspect-ratio: 3 / 4;
-      z-index: 3;
+      top: -7.5%;
+      left: 0;
+      width: 100%;
+      height: 115%;
+      z-index: 2;
       will-change: transform;
+      overflow: hidden;
     }
 
     .island-wrapper img {
@@ -154,45 +168,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center 30%;
-      border-radius: 4px;
       display: block;
-
-      /* Ombre portée propre */
-      box-shadow:
-        0 40px 80px rgba(0, 0, 0, 0.7),
-        0 10px 30px rgba(0, 0, 0, 0.5),
-        0 0  0 1px rgba(255, 255, 255, 0.04);
-
-      /* Léger vignette interne */
-      mask-image: linear-gradient(
-        to bottom,
-        rgba(0,0,0,1) 60%,
-        rgba(0,0,0,0.6) 85%,
-        rgba(0,0,0,0) 100%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        rgba(0,0,0,1) 60%,
-        rgba(0,0,0,0.6) 85%,
-        rgba(0,0,0,0) 100%
-      );
-    }
-
-    /* Reflet en bas de l'image */
-    .island-wrapper::after {
-      content: '';
-      position: absolute;
-      bottom: -60px;
-      left: 10%;
-      right: 10%;
-      height: 60px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 69, 0, 0.06) 0%,
-        transparent 100%
-      );
-      filter: blur(20px);
-      border-radius: 50%;
     }
 
     /* ─── META-DATA BAS ─── */
@@ -266,7 +242,7 @@
         rgba(255, 69, 0, 0.15) 80%,
         transparent 100%
       );
-      z-index: 2;
+      z-index: 7;
       pointer-events: none;
     }
 
@@ -284,7 +260,6 @@
       overflow: hidden;
     }
 
-    /* Bande orange décorative en haut */
     .content::before {
       content: '';
       position: absolute;
@@ -452,10 +427,6 @@
       .hero-title {
         font-size: clamp(5rem, 22vw, 10rem);
       }
-
-      .island-wrapper {
-        width: 75vw;
-      }
     }
 
     /* ─── ENTRY ANIMATION ─── */
@@ -472,10 +443,8 @@
   <!-- ════════════ HERO ════════════ -->
   <section class="hero">
 
-    <!-- Ligne centrale décorative -->
     <div class="hero-line"></div>
 
-    <!-- Meta haut -->
     <div class="meta-top">
       <div>
         <div class="meta-label">Iron Forge</div>
@@ -487,21 +456,18 @@
       </div>
     </div>
 
-    <!-- Titre massif fond -->
     <h1 class="hero-title">IRON<span>FORGE</span></h1>
 
-    <!-- Image centrale -->
     <div class="island-wrapper">
       <img
         src="dzd.webp"
         alt="Athlète en deadlift — performance maximale"
-        width="520"
-        height="693"
+        width="1920"
+        height="1080"
         fetchpriority="high"
       />
     </div>
 
-    <!-- Meta bas -->
     <div class="meta-bottom">
       <div class="meta-coords">
         48°51′N 2°21′E<br />
@@ -568,18 +534,18 @@
   </section>
 
   <script>
-    // ─── GSAP REGISTRATION ───
     gsap.registerPlugin(ScrollTrigger);
 
-    // ─── ENTRY ANIMATION (page load) ───
+    // ─── ENTRY ANIMATION ───
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.to('.meta-top',       { opacity: 1, y: 0, duration: 0.8, delay: 0.2 })
       .to('.hero-title',     { opacity: 1, duration: 1 }, '-=0.4')
-      .to('.island-wrapper', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.6')
+      .to('.island-wrapper', { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.8')
       .to('.meta-bottom',    { opacity: 1, duration: 0.8 }, '-=0.5');
 
     // ─── PARALLAX SCROLL ───
+
     // 1. H1 remonte rapidement
     gsap.to('.hero-title', {
       yPercent: -150,
@@ -592,9 +558,9 @@
       }
     });
 
-    // 2. Image centrale remonte plus lentement
+    // 2. Image pleine — glisse vers le bas pendant le scroll (effet parallax)
     gsap.to('.island-wrapper', {
-      yPercent: -50,
+      yPercent: 15,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
@@ -606,7 +572,7 @@
 
     // 3. Léger zoom sur l'image (impression caméra)
     gsap.to('.island-wrapper img', {
-      scale: 1.1,
+      scale: 1.08,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
@@ -640,23 +606,7 @@
       }
     });
 
-    // 6. Content remonte pour recouvrir le hero
-    //    (translateY initial de 100px → 0, géré avec fromTo)
-    gsap.fromTo('.content',
-      { y: 0 },
-      {
-        y: 0, // La section remonte naturellement grâce au scroll normal
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.content',
-          start: 'top bottom',
-          end: 'top top',
-          scrub: 1,
-        }
-      }
-    );
-
-    // Entrée des éléments content au scroll
+    // ─── CONTENT ANIMATIONS ───
     gsap.fromTo('.content-eyebrow',
       { opacity: 0, y: 30 },
       {
