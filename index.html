@@ -24,6 +24,7 @@
 
     :root {
       --orange:   #ff4500;
+      --orange-dim: rgba(255, 69, 0, 0.6);
       --cream:    #f0ece4;
       --dark:     #111010;
       --grey:     #d1d1d1;
@@ -59,36 +60,52 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #1a1610;
+      background: #0e0d0c;
     }
 
-    /* Overlay sombre pour lisibilité du texte */
+    /* Overlay — dégradé renforcé pour lisibilité du titre */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.45) 0%,
-        rgba(0, 0, 0, 0.15) 45%,
-        rgba(0, 0, 0, 0.55) 100%
-      );
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.55) 100%),
+        linear-gradient(to bottom,
+          rgba(0,0,0,0.60) 0%,
+          rgba(0,0,0,0.10) 35%,
+          rgba(0,0,0,0.10) 65%,
+          rgba(0,0,0,0.70) 100%
+        );
       z-index: 4;
       pointer-events: none;
     }
 
-    /* Grain overlay — au-dessus de l'overlay */
+    /* Grain overlay */
     .hero::after {
       content: '';
       position: absolute;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.35;
+      opacity: 0.4;
       pointer-events: none;
       z-index: 6;
+      mix-blend-mode: overlay;
     }
 
-    /* ─── TITRE MASSIF EN FOND ─── */
+    /* ─── SCAN LINE ANIMATION ─── */
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--orange), transparent);
+      z-index: 12;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ─── TITRE MASSIF EN FOND — renforcé ─── */
     .hero-title {
       position: absolute;
       top: 50%;
@@ -100,16 +117,36 @@
       line-height: 0.85;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      color: transparent;
-      -webkit-text-stroke: 1.5px rgba(240, 236, 228, 0.18);
+      /* Légère opacité remplie + stroke fort = lecture sans perdre l'effet éditorial */
+      color: rgba(240, 236, 228, 0.06);
+      -webkit-text-stroke: 2px rgba(240, 236, 228, 0.65);
+      text-shadow:
+        0 0 80px rgba(240, 236, 228, 0.08),
+        0 0 200px rgba(240, 236, 228, 0.04);
       white-space: nowrap;
       user-select: none;
       z-index: 8;
-      will-change: transform;
+      will-change: transform, opacity;
     }
 
-    .hero-title span {
-      -webkit-text-stroke: 1.5px rgba(255, 69, 0, 0.35);
+    /* FORGE — accent orange bien visible */
+    .hero-title .forge {
+      color: rgba(255, 69, 0, 0.08);
+      -webkit-text-stroke: 2px rgba(255, 69, 0, 0.80);
+      text-shadow:
+        0 0 60px rgba(255, 69, 0, 0.22),
+        0 0 140px rgba(255, 69, 0, 0.10);
+    }
+
+    /* Lettres individuelles pour stagger */
+    .hero-title .char {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    /* Espace entre IRON et FORGE */
+    .hero-title .word-break {
+      display: block;
     }
 
     /* ─── META-DATA HAUT ─── */
@@ -154,10 +191,10 @@
     /* ─── IMAGE PLEIN ÉCRAN ─── */
     .island-wrapper {
       position: absolute;
-      top: -7.5%;
+      top: -10%;
       left: 0;
       width: 100%;
-      height: 115%;
+      height: 120%;
       z-index: 2;
       will-change: transform;
       overflow: hidden;
@@ -169,6 +206,8 @@
       object-fit: cover;
       object-position: center 30%;
       display: block;
+      transform-origin: center center;
+      will-change: transform;
     }
 
     /* ─── META-DATA BAS ─── */
@@ -189,7 +228,7 @@
       font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.2em;
-      color: rgba(240, 236, 228, 0.3);
+      color: rgba(240, 236, 228, 0.35);
       line-height: 1.8;
     }
 
@@ -215,7 +254,7 @@
 
     @keyframes scroll-pulse {
       0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50%       { opacity: 1;   transform: scaleY(1.15); }
+      50%       { opacity: 1;   transform: scaleY(1.2); }
     }
 
     .meta-edition {
@@ -223,12 +262,12 @@
       font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.2em;
-      color: rgba(240, 236, 228, 0.3);
+      color: rgba(240, 236, 228, 0.35);
       text-align: right;
       line-height: 1.8;
     }
 
-    /* Ligne décorative centrale */
+    /* ─── LIGNES DÉCORATIVES ─── */
     .hero-line {
       position: absolute;
       top: 0;
@@ -238,12 +277,50 @@
       background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(255, 69, 0, 0.15) 20%,
-        rgba(255, 69, 0, 0.15) 80%,
+        rgba(255, 69, 0, 0.20) 20%,
+        rgba(255, 69, 0, 0.20) 80%,
         transparent 100%
       );
       z-index: 7;
       pointer-events: none;
+    }
+
+    /* Coins décoratifs */
+    .corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 11;
+      opacity: 0;
+    }
+
+    .corner::before,
+    .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--orange);
+    }
+
+    .corner::before { width: 100%; height: 1.5px; top: 0; left: 0; }
+    .corner::after  { width: 1.5px; height: 100%; top: 0; left: 0; }
+
+    .corner-tl { top: 2.5rem; left: 3rem; }
+    .corner-tr { top: 2.5rem; right: 3rem; transform: scaleX(-1); }
+    .corner-bl { bottom: 2.5rem; left: 3rem; transform: scaleY(-1); }
+    .corner-br { bottom: 2.5rem; right: 3rem; transform: scale(-1); }
+
+    /* ─── BADGE CENTRAL ─── */
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
     }
 
     /* ════════════════════════════════════════
@@ -268,6 +345,8 @@
       right: 0;
       height: 3px;
       background: var(--orange);
+      transform-origin: left;
+      transform: scaleX(0);
     }
 
     .content-left {
@@ -330,19 +409,26 @@
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, gap 0.2s;
       width: fit-content;
+      position: relative;
+      overflow: hidden;
     }
 
-    .content-cta:hover { background: #e03d00; }
-
-    .content-cta svg {
-      transition: transform 0.2s;
+    .content-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      transform: translateX(-110%) skewX(-20deg);
+      transition: transform 0.4s ease;
     }
 
-    .content-cta:hover svg {
-      transform: translateX(4px);
+    .content-cta:hover::before {
+      transform: translateX(110%) skewX(-20deg);
     }
+
+    .content-cta:hover { background: #e03d00; gap: 1.4rem; }
 
     .content-right {
       padding: 6rem 6rem 6rem 4rem;
@@ -362,6 +448,22 @@
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+      position: relative;
+    }
+
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--orange);
+      transition: width 0.6s ease;
+    }
+
+    .stat-item.in-view::before {
+      width: 2rem;
     }
 
     .stat-number {
@@ -405,35 +507,30 @@
       .content {
         grid-template-columns: 1fr;
       }
-
       .content-left {
         padding: 5rem 2rem 3rem;
         border-right: none;
         border-bottom: 1px solid rgba(17, 16, 16, 0.1);
       }
-
       .content-right {
         padding: 3rem 2rem 5rem;
       }
-
-      .stat-grid {
-        gap: 2rem;
-      }
-
-      .meta-top, .meta-bottom {
-        padding: 0 1.5rem;
-      }
-
+      .stat-grid { gap: 2rem; }
+      .meta-top, .meta-bottom { padding: 0 1.5rem; }
+      .corner { display: none; }
       .hero-title {
         font-size: clamp(5rem, 22vw, 10rem);
+        -webkit-text-stroke: 1.5px rgba(240, 236, 228, 0.60);
       }
     }
 
-    /* ─── ENTRY ANIMATION ─── */
+    /* ─── ÉTATS INITIAUX (tout caché avant animation) ─── */
     .hero-title,
     .island-wrapper,
     .meta-top,
-    .meta-bottom {
+    .meta-bottom,
+    .hero-line,
+    .scan-line {
       opacity: 0;
     }
   </style>
@@ -443,7 +540,17 @@
   <!-- ════════════ HERO ════════════ -->
   <section class="hero">
 
+    <!-- Scan line -->
+    <div class="scan-line"></div>
+
+    <!-- Lignes décoratives -->
     <div class="hero-line"></div>
+
+    <!-- Coins -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
 
     <div class="meta-top">
       <div>
@@ -456,7 +563,12 @@
       </div>
     </div>
 
-    <h1 class="hero-title">IRON<span>FORGE</span></h1>
+    <!-- Titre — letters splittées en JS -->
+    <h1 class="hero-title" aria-label="Iron Forge">
+      <span class="word iron-word"></span>
+      <span class="word-break"></span>
+      <span class="word forge-word forge"></span>
+    </h1>
 
     <div class="island-wrapper">
       <img
@@ -536,81 +648,156 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // ─── ENTRY ANIMATION ───
+    /* ─── SPLIT TEXT ─── */
+    function splitLetters(containerClass, letters) {
+      const el = document.querySelector(containerClass);
+      el.innerHTML = letters.split('').map(ch =>
+        `<span class="char" style="opacity:0;transform:translateY(80px) skewY(6deg);display:inline-block;">${ch}</span>`
+      ).join('');
+    }
+
+    splitLetters('.iron-word', 'IRON');
+    splitLetters('.forge-word', 'FORGE');
+
+    /* ─── MASTER TIMELINE ENTRY ─── */
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.to('.meta-top',       { opacity: 1, y: 0, duration: 0.8, delay: 0.2 })
-      .to('.hero-title',     { opacity: 1, duration: 1 }, '-=0.4')
-      .to('.island-wrapper', { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.8')
-      .to('.meta-bottom',    { opacity: 1, duration: 0.8 }, '-=0.5');
+    // 1. Scan line sweep
+    tl.to('.scan-line', {
+      opacity: 1,
+      y: '100vh',
+      duration: 0.7,
+      ease: 'power2.in',
+    })
+    .set('.scan-line', { opacity: 0 })
 
-    // ─── PARALLAX SCROLL ───
+    // 2. Image apparaît (scale depuis 1.08 → 1)
+    .fromTo('.island-wrapper', 
+      { opacity: 0, scale: 1.12 },
+      { opacity: 1, scale: 1, duration: 1.4, ease: 'power2.out' },
+      '-=0.2'
+    )
 
-    // 1. H1 remonte rapidement
+    // 3. Ligne centrale
+    .to('.hero-line', { opacity: 1, duration: 0.5 }, '-=1.0')
+
+    // 4. Coins décoratifs
+    .to('.corner', { opacity: 1, duration: 0.4, stagger: 0.08 }, '-=0.8')
+
+    // 5. Méta haut (slide du haut)
+    .fromTo('.meta-top',
+      { opacity: 0, y: -24 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.6'
+    )
+
+    // 6. H1 — stagger lettres IRON
+    .to('.hero-title', { opacity: 1, duration: 0.01 }, '-=0.4')
+    .to('.iron-word .char', {
+      opacity: 1,
+      y: 0,
+      skewY: 0,
+      duration: 0.7,
+      stagger: 0.07,
+      ease: 'back.out(1.4)',
+    }, '-=0.3')
+
+    // 7. FORGE avec un léger décalage
+    .to('.forge-word .char', {
+      opacity: 1,
+      y: 0,
+      skewY: 0,
+      duration: 0.7,
+      stagger: 0.07,
+      ease: 'back.out(1.4)',
+    }, '-=0.35')
+
+    // 8. Méta bas (slide du bas)
+    .fromTo('.meta-bottom',
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.5'
+    );
+
+    /* ─── PARALLAX SCROLL ─── */
+
+    // H1 remonte rapidement + s'étire légèrement
     gsap.to('.hero-title', {
-      yPercent: -150,
+      yPercent: -170,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: 0.8,
       }
     });
 
-    // 2. Image pleine — glisse vers le bas pendant le scroll (effet parallax)
+    // Image glisse vers le bas
     gsap.to('.island-wrapper', {
-      yPercent: 15,
+      yPercent: 18,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: 0.8,
       }
     });
 
-    // 3. Léger zoom sur l'image (impression caméra)
+    // Zoom image pendant scroll
     gsap.to('.island-wrapper img', {
-      scale: 1.08,
+      scale: 1.12,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: 0.8,
       }
     });
 
-    // 4. Méta-données se dissipent
-    gsap.to(['.meta-top', '.meta-bottom'], {
+    // Méta-données disparaissent
+    gsap.to(['.meta-top', '.meta-bottom', '.corner'], {
       opacity: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
-        end: '40% top',
-        scrub: 1,
+        end: '35% top',
+        scrub: 0.6,
       }
     });
 
-    // 5. Ligne décorative se dissipe
+    // Ligne centrale disparaît
     gsap.to('.hero-line', {
       opacity: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
         start: 'top top',
-        end: '30% top',
-        scrub: 1,
+        end: '25% top',
+        scrub: 0.6,
       }
     });
 
-    // ─── CONTENT ANIMATIONS ───
+    /* ─── BARRE ORANGE CONTENT ─── */
+    gsap.to('.content::before', {
+      scaleX: 1,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.content',
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+      }
+    });
+
+    /* ─── CONTENT ANIMATIONS ─── */
     gsap.fromTo('.content-eyebrow',
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 30, letterSpacing: '0.6em' },
       {
-        opacity: 1, y: 0, duration: 0.8,
+        opacity: 1, y: 0, letterSpacing: '0.3em', duration: 0.9,
         scrollTrigger: {
           trigger: '.content',
           start: 'top 80%',
@@ -620,9 +807,9 @@
     );
 
     gsap.fromTo('.content-heading',
-      { opacity: 0, y: 50 },
+      { opacity: 0, y: 60, skewY: 3 },
       {
-        opacity: 1, y: 0, duration: 1, delay: 0.15,
+        opacity: 1, y: 0, skewY: 0, duration: 1, delay: 0.1,
         scrollTrigger: {
           trigger: '.content',
           start: 'top 80%',
@@ -634,7 +821,7 @@
     gsap.fromTo(['.content-body', '.content-cta'],
       { opacity: 0, y: 30 },
       {
-        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, delay: 0.3,
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, delay: 0.25,
         scrollTrigger: {
           trigger: '.content',
           start: 'top 75%',
@@ -644,21 +831,26 @@
     );
 
     gsap.fromTo('.stat-item',
-      { opacity: 0, y: 40 },
+      { opacity: 0, y: 50, scale: 0.95 },
       {
-        opacity: 1, y: 0, duration: 0.7, stagger: 0.1, delay: 0.2,
+        opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, delay: 0.15,
         scrollTrigger: {
           trigger: '.stat-grid',
           start: 'top 85%',
           toggleActions: 'play none none reverse',
+          onEnter: () => {
+            document.querySelectorAll('.stat-item').forEach((el, i) => {
+              setTimeout(() => el.classList.add('in-view'), 300 + i * 100);
+            });
+          }
         }
       }
     );
 
     gsap.fromTo('.content-quote',
-      { opacity: 0, x: -20 },
+      { opacity: 0, x: -30 },
       {
-        opacity: 1, x: 0, duration: 0.8,
+        opacity: 1, x: 0, duration: 0.9,
         scrollTrigger: {
           trigger: '.content-quote',
           start: 'top 85%',
