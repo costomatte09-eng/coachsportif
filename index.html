@@ -520,14 +520,16 @@
     ══════════════════════════════════════ */
     .s-programs {
       background: var(--grey);
-      padding: 8rem 6rem;
+      padding: 8rem 0;
       position: relative;
+      overflow: hidden;
     }
 
     .programs-header {
       display: flex; align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 5rem;
+      margin-bottom: 4rem;
+      padding: 0 6rem;
     }
 
     .programs-header .h2-display { margin-bottom: 0; }
@@ -539,44 +541,43 @@
       text-align: right; padding-bottom: 0.4rem;
     }
 
-    .prog-list { display: flex; flex-direction: column; gap: 0; }
+    .prog-viewport {
+      overflow: hidden;
+      padding: 0 6rem;
+    }
+
+    .prog-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      will-change: transform;
+    }
 
     .prog-item {
-      display: grid;
-      grid-template-columns: 2rem 1fr 1fr auto;
-      gap: 0 3rem;
-      padding: 3rem 0;
-      border-top: 1px solid rgba(17,16,16,0.10);
-      align-items: center;
+      width: min(520px, 78vw);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      padding: 2.2rem;
+      border: 1px solid rgba(17,16,16,0.16);
+      background: rgba(255,255,255,0.25);
       cursor: none;
-      transition: background 0.2s;
-      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
-    .prog-item:last-child { border-bottom: 1px solid rgba(17,16,16,0.10); }
-
-    .prog-item::before {
-      content: '';
-      position: absolute; left: -6rem; right: -6rem; top: 0; bottom: 0;
-      background: rgba(255,69,0,0.03);
-      opacity: 0; transition: opacity 0.25s;
+    .prog-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,69,0,0.5);
+      background: rgba(255,255,255,0.4);
     }
-
-    .prog-item:hover::before { opacity: 1; }
-
-    .prog-arrow {
-      color: var(--orange); font-size: 1.2rem;
-      opacity: 0; transition: opacity 0.25s, transform 0.25s;
-      font-family: var(--fd);
-    }
-
-    .prog-item:hover .prog-arrow { opacity: 1; transform: translateX(4px); }
 
     .prog-num {
       font-family: var(--fd); font-weight: 400;
       font-size: 0.65rem; letter-spacing: 0.2em;
       color: var(--orange); align-self: start;
-      padding-top: 0.3rem;
+      border: 1px solid rgba(255,69,0,0.45);
+      padding: 0.35rem 0.55rem;
     }
 
     .prog-name {
@@ -593,7 +594,7 @@
     .prog-desc {
       font-family: var(--fb); font-weight: 300;
       font-size: 0.82rem; line-height: 1.7;
-      color: rgba(17,16,16,0.52); max-width: 38ch;
+      color: rgba(17,16,16,0.62); max-width: 38ch;
     }
 
     .prog-tags {
@@ -611,15 +612,16 @@
     .prog-price {
       font-family: var(--fd); font-weight: 900;
       font-size: clamp(2rem, 3vw, 3rem);
-      color: var(--dark); text-align: right;
+      color: var(--dark); text-align: left;
       white-space: nowrap;
+      margin-top: auto;
     }
 
     .prog-price span {
       font-family: var(--fb); font-weight: 300;
       font-size: 0.7rem; letter-spacing: 0.15em;
       color: rgba(17,16,16,0.4); display: block;
-      text-align: right; text-transform: uppercase;
+      text-align: left; text-transform: uppercase;
     }
 
     /* ══════════════════════════════════════
@@ -890,11 +892,12 @@
       .coach-visual { min-height: 55vw; }
       .coach-visual::after { background: linear-gradient(to bottom, transparent 70%, var(--dark)); }
       .coach-content { padding: 4rem 2rem; }
-      .s-programs { padding: 6rem 2rem; }
+      .s-programs { padding: 6rem 0; }
       .programs-header { flex-direction: column; gap: 1.5rem; }
       .programs-sub { text-align: left; }
-      .prog-item { grid-template-columns: 2.5rem 1fr; gap: 1.5rem; }
-      .prog-price, .prog-arrow { display: none; }
+      .programs-header, .prog-viewport { padding-left: 2rem; padding-right: 2rem; }
+      .prog-track { flex-direction: column; width: 100%; gap: 1.2rem; }
+      .prog-item { width: 100%; min-height: auto; }
       .s-results { padding: 6rem 2rem; }
       .testi-item { padding: 2.5rem 0; border-left: none !important; border-right: none !important; }
       .s-contact { padding: 6rem 2rem; gap: 4rem; }
@@ -1087,7 +1090,8 @@
       </p>
     </div>
 
-    <div class="prog-list">
+    <div class="prog-viewport">
+      <div class="prog-track">
 
       <div class="prog-item">
         <div class="prog-num">01</div>
@@ -1103,7 +1107,6 @@
         <div class="prog-price">
           149€<span>/ mois</span>
         </div>
-        <div class="prog-arrow">→</div>
       </div>
 
       <div class="prog-item">
@@ -1119,7 +1122,6 @@
         <div class="prog-price">
           290€<span>/ mois</span>
         </div>
-        <div class="prog-arrow">→</div>
       </div>
 
       <div class="prog-item">
@@ -1136,9 +1138,9 @@
         <div class="prog-price">
           490€<span>/ mois</span>
         </div>
-        <div class="prog-arrow">→</div>
       </div>
 
+      </div>
     </div>
   </section>
 
@@ -1451,15 +1453,42 @@
       }
     );
 
-    /* Programmes */
-    gsap.utils.toArray('.prog-item').forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.65, delay: i * 0.1,
-          scrollTrigger: { trigger: '.prog-list', start: 'top 80%', toggleActions: 'play none none reverse' }
+    /* Programmes — défilement horizontal au scroll */
+    const programsSection = document.querySelector('.s-programs');
+    const progViewport = document.querySelector('.prog-viewport');
+    const progTrack = document.querySelector('.prog-track');
+
+    if (programsSection && progViewport && progTrack && window.matchMedia('(min-width: 901px)').matches) {
+      gsap.fromTo('.prog-item',
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.12,
+          scrollTrigger: { trigger: '.s-programs', start: 'top 78%', toggleActions: 'play none none reverse' }
         }
       );
-    });
+
+      gsap.to(progTrack, {
+        x: () => -(progTrack.scrollWidth - progViewport.clientWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: programsSection,
+          start: 'top top',
+          end: () => `+=${Math.max(progTrack.scrollWidth - progViewport.clientWidth, 1)}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    } else {
+      gsap.utils.toArray('.prog-item').forEach((el, i) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.65, delay: i * 0.1,
+            scrollTrigger: { trigger: '.s-programs', start: 'top 85%', toggleActions: 'play none none reverse' }
+          }
+        );
+      });
+    }
 
     /* Photo pleine largeur parallax */
     gsap.to('.s-fullimg img', {
