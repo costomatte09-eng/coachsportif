@@ -546,6 +546,7 @@
       padding: 0 6rem;
       display: flex;
       justify-content: center;
+      background: var(--grey);
     }
 
     .prog-track {
@@ -556,8 +557,10 @@
     }
 
     .prog-item {
-      width: min(74vh, calc(100vw - 12rem));
+      --prog-card-size: min(74vh, calc(100vw - 12rem));
+      width: var(--prog-card-size);
       aspect-ratio: 1 / 1;
+      margin-inline: calc((100vw - var(--prog-card-size) - 12rem) / 2);
       display: flex;
       flex-direction: column;
       gap: 1.4rem;
@@ -903,10 +906,12 @@
       .prog-viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
       .prog-track { gap: 1rem; }
       .prog-item {
+        --prog-card-size: calc(100vw - 4rem);
         width: calc(100vw - 4rem);
         max-width: calc(100vw - 4rem);
         min-height: auto;
         aspect-ratio: 1 / 1;
+        margin-inline: 0;
         scroll-snap-align: start;
       }
       .s-results { padding: 6rem 2rem; }
@@ -1489,9 +1494,9 @@
           start: 'top top',
           end: () => {
             const step = progViewport.clientWidth;
-            return `+=${Math.max((cardCount - 1) * step * 1.25, 1)}`;
+            return `+=${Math.max((cardCount - 1) * step, 1)}`;
           },
-          scrub: 0.6,
+          scrub: 0.35,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true
