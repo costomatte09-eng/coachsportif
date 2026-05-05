@@ -1148,7 +1148,7 @@
          lumières dures, néons ou spots, fonte et barres au sol,
          perspective profonde, ambiance cinématique, pas de personne
          ou silhouette floue en arrière-plan -->
-    <img src="gym-ambiance.webp"
+    <img id="ambience-image" src="images/gimp-ambience.webp"
          alt="Ambiance salle de sport Iron Forge"
          width="1920" height="800" loading="lazy" decoding="async" />
     <div class="fullimg-label">Paris — 2024</div>
@@ -1286,6 +1286,13 @@
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
+
+    /* ── Image ambiance centralisée ── */
+    const AMBIENCE_IMAGE_PATH = 'images/gimp-ambience.webp';
+    const ambienceImage = document.getElementById('ambience-image');
+    if (ambienceImage) {
+      ambienceImage.src = AMBIENCE_IMAGE_PATH;
+    }
 
     /* ── Curseur ── */
     const cur = document.getElementById('cur');
