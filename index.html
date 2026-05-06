@@ -218,7 +218,34 @@
       background: linear-gradient(to bottom, transparent, rgba(255,69,0,0.18) 20%, rgba(255,69,0,0.18) 80%, transparent);
       z-index: 7; pointer-events: none;
     }
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
 
+.hero-media {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+    .hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.4);
+}
     .corner {
       position: absolute; width: 22px; height: 22px; z-index: 11; opacity: 0;
     }
@@ -1063,19 +1090,25 @@
     <div class="island-wrapper">
       <!-- IMAGE HERO : athlète en deadlift lourd, fond gym industrielle,
            éclairage dramatique, photo format paysage 1920×1080 -->
-      <img src="dzd.webp" alt="Athlète en deadlift — performance maximale"
-           width="1920" height="1080" fetchpriority="high" />
-    </div>
+      <!-- HERO -->
+<section class="hero">
 
-    <div class="meta-bottom">
-      <div class="meta-coords">48°51′N 2°21′E<br/>Élévation — 35m</div>
-      <div class="meta-scroll-hint">
-        <div class="scroll-line"></div>
-        Scroll
-      </div>
-      <div class="meta-edition">Collection 2024<br/>Vol. 01 / 12</div>
+  <div class="hero-media">
+    <video class="hero-video" autoplay muted loop playsinline poster="dzd.webp">
+      <source src="Hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="meta-bottom">
+    <div class="meta-coords">48°51′N 2°21′E<br/>Élévation — 35m</div>
+    <div class="meta-scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
     </div>
-  </section>
+    <div class="meta-edition">Collection 2024<br/>Vol. 01 / 12</div>
+  </div>
+
+</section>
 
   <!-- ══════ INTRO / CHIFFRES ══════ -->
   <section class="s-intro">
