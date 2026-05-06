@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MUSCLE-EN BONNE SANTE — Performance Studio</title>
+  <title>IRON FORGE — Performance Studio</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -218,34 +218,7 @@
       background: linear-gradient(to bottom, transparent, rgba(255,69,0,0.18) 20%, rgba(255,69,0,0.18) 80%, transparent);
       z-index: 7; pointer-events: none;
     }
-.hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
 
-.hero-media {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-    .hero::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0,0,0,0.4);
-}
     .corner {
       position: absolute; width: 22px; height: 22px; z-index: 11; opacity: 0;
     }
@@ -541,228 +514,124 @@
       font-weight: 400; color: var(--cream);
     }
 
-    /* ══════ PROGRAMMES ══════ */
-.s-programs {
-  background: var(--grey);
-  padding: 8rem 0 0;
-  position: relative;
-  overflow: hidden;
-}
- 
-.programs-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 4rem;
-  padding: 0 6rem;
-}
- 
-.programs-header__left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
- 
-.programs-eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--orange, #e8521a);
-  font-weight: 500;
-}
- 
-.programs-title {
-  font-size: clamp(3.5rem, 7vw, 6rem);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: var(--dark, #0f0e0d);
-  margin: 0;
-}
- 
-.programs-desc {
-  max-width: 22rem;
-  text-align: right;
-  font-size: 0.85rem;
-  line-height: 1.65;
-  color: rgba(15,14,13,0.45);
-  margin: 0;
-}
- 
-/* ── viewport ── */
-.prog-viewport {
-  overflow: hidden;
-  padding: 0 6rem;
-  display: flex;
-  justify-content: center;
-  background: var(--grey);
-}
- 
-.prog-track {
-  display: flex;
-  gap: 0;
-  width: max-content;
-  will-change: transform;
-}
- 
-/* ── carte ── */
-.prog-item {
-  --card-w: min(68vh, calc(100vw - 14rem));
-  --card-h: calc(var(--card-w) * 0.86); /* légèrement moins haut que large = look carré */
-  width: var(--card-w);
-  height: var(--card-h);
-  margin-inline: calc((100vw - var(--card-w) - 12rem) / 2);
-  border-radius: 2rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2.8rem 3rem;
-  position: relative;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.14);
-  background:
-    radial-gradient(circle at 18% 14%, rgba(255,69,0,0.18) 0%, rgba(255,69,0,0.02) 45%, transparent 70%),
-    linear-gradient(155deg, #1f1b18 0%, #151311 55%, #0f0e0d 100%);
-  /* grain subtil */
-  isolation: isolate;
-}
- 
-/* grain overlay */
-.prog-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.35;
-  pointer-events: none;
-  border-radius: inherit;
-  z-index: 0;
-}
- 
-.prog-item > * { position: relative; z-index: 1; }
- 
-/* ── numéro ── */
-.prog-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid rgba(255,69,0,0.5);
-  border-radius: 0.35rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--orange, #e8521a);
-}
- 
-/* ── corps central ── */
-.prog-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.8rem 0;
-}
- 
-/* ── nom ── */
-.prog-name {
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: #f0ece4;
-  text-transform: uppercase;
-}
- 
-/* ── description ── */
-.prog-desc {
-  font-size: 0.82rem;
-  line-height: 1.65;
-  color: rgba(240,236,228,0.55);
-  max-width: 34ch;
-  margin: 0;
-}
- 
-/* ── tags ── */
-.prog-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.4rem;
-}
- 
-.prog-tags span {
-  padding: 0.3rem 0.75rem;
-  border: 1px solid rgba(232,82,26,0.5);
-  border-radius: 0.25rem;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange, #e8521a);
-}
- 
-/* ── prix ── */
-.prog-price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid rgba(240,236,228,0.08);
-}
- 
-.prog-price strong {
-  font-size: clamp(2.2rem, 4vw, 3rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: #f0ece4;
-  line-height: 1;
-}
- 
-.prog-price span {
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(240,236,228,0.45);
-}
- 
-/* ── indicateur de navigation (dots) ── */
-.prog-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 2.5rem 0 4rem;
-}
- 
-.prog-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(15,14,13,0.2);
-  transition: all 0.4s ease;
-}
- 
-.prog-dot.active {
-  width: 22px;
-  border-radius: 3px;
-  background: var(--orange, #e8521a);
-}
- 
-/* ══════ RESPONSIVE MOBILE ══════ */
-@media (max-width: 900px) {
-  .programs-header { padding: 0 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .programs-desc { text-align: left; max-width: 100%; }
-  .prog-viewport { padding: 0 1.5rem; }
-  .prog-item {
-    --card-w: calc(100vw - 3rem);
-    --card-h: calc(var(--card-w) * 1.1); /* un peu plus haut sur mobile */
-    margin-inline: 0;
-    margin-right: 1.2rem;
-  }
-  .prog-track { gap: 0; }
-}
+    /* ══════════════════════════════════════
+       SECTION 4 — PROGRAMMES
+       3 offres — layout ligne éditorial
+    ══════════════════════════════════════ */
+    .s-programs {
+      background: var(--grey);
+      padding: 8rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .programs-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      padding: 0 6rem;
+    }
+
+    .programs-header .h2-display { margin-bottom: 0; }
+
+    .programs-sub {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.85rem; line-height: 1.7;
+      color: rgba(17,16,16,0.5); max-width: 34ch;
+      text-align: right; padding-bottom: 0.4rem;
+    }
+
+    .prog-viewport {
+      overflow: hidden;
+      padding: 0 6rem;
+      display: flex;
+      justify-content: center;
+      background: var(--grey);
+    }
+
+    .prog-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .prog-item {
+      --prog-card-size: min(70vh, calc(100vw - 12rem));
+      width: calc(var(--prog-card-size) * 0.72);
+      aspect-ratio: 2 / 3;
+      border-radius: 2.5rem;
+      margin-inline: calc((100vw - calc(var(--prog-card-size) * 0.72) - 12rem) / 2);
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      padding: 2.2rem;
+      border: 1px solid rgba(255,69,0,0.24);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(255,69,0,0.18) 0%, rgba(255,69,0,0.02) 45%, rgba(0,0,0,0) 70%),
+        linear-gradient(155deg, #1f1b18 0%, #151311 55%, #0f0e0d 100%);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(240,236,228,0.03);
+      overflow: hidden;
+      cursor: none;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .prog-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,69,0,0.58);
+    }
+
+    .prog-num {
+      font-family: var(--fd); font-weight: 400;
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--orange); align-self: start;
+      border: 1px solid rgba(255,69,0,0.45);
+      padding: 0.35rem 0.55rem;
+    }
+
+    .prog-name {
+      font-family: var(--fd); font-weight: 900;
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      text-transform: uppercase; letter-spacing: -0.01em;
+      line-height: 1; color: var(--cream);
+    }
+
+    .prog-details {
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+
+    .prog-desc {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.82rem; line-height: 1.7;
+      color: rgba(240,236,228,0.72); max-width: 38ch;
+    }
+
+    .prog-tags {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+    }
+
+    .prog-tag {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 0.58rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--orange);
+      border: 1px solid rgba(255,69,0,0.35);
+      padding: 0.3rem 0.7rem;
+    }
+
+    .prog-price {
+      font-family: var(--fd); font-weight: 900;
+      font-size: clamp(2rem, 3vw, 3rem);
+      color: var(--cream); text-align: left;
+      white-space: nowrap;
+      margin-top: auto;
+    }
+
+    .prog-price span {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      color: rgba(240,236,228,0.5); display: block;
+      text-align: left; text-transform: uppercase;
+    }
 
     /* ══════════════════════════════════════
        SECTION 5 — RÉSULTATS / TÉMOIGNAGES
@@ -1090,25 +959,19 @@
     <div class="island-wrapper">
       <!-- IMAGE HERO : athlète en deadlift lourd, fond gym industrielle,
            éclairage dramatique, photo format paysage 1920×1080 -->
-      <!-- HERO -->
-<section class="hero">
-
-  <div class="hero-media">
-    <video class="hero-video" autoplay muted loop playsinline poster="dzd.webp">
-      <source src="Hero-video.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="meta-bottom">
-    <div class="meta-coords">48°51′N 2°21′E<br/>Élévation — 35m</div>
-    <div class="meta-scroll-hint">
-      <div class="scroll-line"></div>
-      Scroll
+      <img src="dzd.webp" alt="Athlète en deadlift — performance maximale"
+           width="1920" height="1080" fetchpriority="high" />
     </div>
-    <div class="meta-edition">Collection 2024<br/>Vol. 01 / 12</div>
-  </div>
 
-</section>
+    <div class="meta-bottom">
+      <div class="meta-coords">48°51′N 2°21′E<br/>Élévation — 35m</div>
+      <div class="meta-scroll-hint">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
+      <div class="meta-edition">Collection 2024<br/>Vol. 01 / 12</div>
+    </div>
+  </section>
 
   <!-- ══════ INTRO / CHIFFRES ══════ -->
   <section class="s-intro">
@@ -1234,96 +1097,70 @@
   </section>
 
   <!-- ══════ PROGRAMMES ══════ -->
-<section class="s-programs" id="programmes">
- 
-  <div class="programs-header">
-    <div class="programs-header__left">
-      <span class="programs-eyebrow">Ce que tu choisis</span>
-      <h2 class="programs-title">PROGRAMMES</h2>
+  <section class="s-programs" id="programmes">
+    <div class="programs-header">
+      <div>
+        <div class="eyebrow">Ce que tu choisis</div>
+        <h2 class="h2-display" style="color:var(--dark)">Programmes</h2>
+      </div>
+      <p class="programs-sub">
+        Trois niveaux d'accompagnement. Du suivi à distance au coaching individuel intensif. Choisir, c'est déjà commencer.
+      </p>
     </div>
-    <p class="programs-desc">
-      Trois niveaux d'accompagnement. Du suivi à distance au coaching individuel intensif.
-      Choisir, c'est déjà commencer.
-    </p>
-  </div>
- 
-  <div class="prog-viewport">
-    <div class="prog-track">
- 
-      <!-- ── Offre 01 ── -->
-        <div class="prog-item">
+
+    <div class="prog-viewport">
+      <div class="prog-track">
+
+      <div class="prog-item">
         <div class="prog-num">01</div>
-        <div class="prog-body">
-          <div class="prog-name">Online<br/>Program</div>
-          <p class="prog-desc">
-            Plan d'entraînement personnalisé, suivi mensuel et accès à la communauté.
-            Pour démarrer avec les bonnes bases, où que tu sois.
-          </p>
+        <div class="prog-name">Online<br/>Program</div>
+        <div class="prog-details">
+          <p class="prog-desc">Programme personnalisé à distance. Accès à l'application de suivi, check-in hebdomadaire, ajustements mensuels.</p>
           <div class="prog-tags">
-            <span>Plan perso</span>
-            <span>Suivi mensuel</span>
-            <span>Communauté</span>
+            <span class="prog-tag">12 semaines</span>
+            <span class="prog-tag">À distance</span>
+            <span class="prog-tag">Tous niveaux</span>
           </div>
         </div>
         <div class="prog-price">
-          <strong>97€</strong>
-          <span>/ mois</span>
+          149€<span>/ mois</span>
         </div>
       </div>
- 
-      <!-- ── Offre 02 ── -->
-        <div class="prog-item">
+
+      <div class="prog-item">
         <div class="prog-num">02</div>
-        <div class="prog-body">
-          <div class="prog-name">Coaching<br/>Hybride</div>
-          <p class="prog-desc">
-            Séances en ligne et check-ins réguliers. Suivi nutrition, ajustements
-            hebdomadaires et accès direct par message.
-          </p>
+        <div class="prog-name">Coaching<br/>Hybride</div>
+        <div class="prog-details">
+          <p class="prog-desc">2 séances mensuelles en présentiel + suivi complet en ligne. Le meilleur des deux mondes pour une progression contrôlée.</p>
           <div class="prog-tags">
-            <span>Check-ins</span>
-            <span>Nutrition</span>
-            <span>Accès direct</span>
+            <span class="prog-tag">Présentiel + online</span>
+            <span class="prog-tag">Bilan mensuel</span>
           </div>
         </div>
         <div class="prog-price">
-          <strong>197€</strong>
-          <span>/ mois</span>
+          290€<span>/ mois</span>
         </div>
       </div>
- 
-      <!-- ── Offre 03 ── -->
-        <div class="prog-item">
+
+      <div class="prog-item">
         <div class="prog-num">03</div>
-        <div class="prog-body">
-          <div class="prog-name">Coaching<br/>Élite</div>
-          <p class="prog-desc">
-            Accompagnement premium illimité. Séances hebdomadaires, nutrition,
-            récupération, analyse vidéo. Pour ceux qui ne font pas les choses à moitié.
-          </p>
+        <div class="prog-name">Coaching<br/>Élite</div>
+        <div class="prog-details">
+          <p class="prog-desc">Accompagnement premium illimité. Séances hebdomadaires, nutrition, récupération, analyse vidéo. Pour ceux qui ne font pas les choses à moitié.</p>
           <div class="prog-tags">
-            <span>Illimité</span>
-            <span>Nutrition incluse</span>
-            <span>Analyse vidéo</span>
+            <span class="prog-tag">Illimité</span>
+            <span class="prog-tag">Nutrition incluse</span>
+            <span class="prog-tag">Analyse vidéo</span>
           </div>
         </div>
         <div class="prog-price">
-          <strong>400€</strong>
-          <span>/ mois</span>
+          490€<span>/ mois</span>
         </div>
       </div>
- 
+
+      </div>
     </div>
-  </div>
- 
-  <!-- dots navigation (mis à jour via JS) -->
-  <div class="prog-dots">
-    <div class="prog-dot active"></div>
-    <div class="prog-dot"></div>
-    <div class="prog-dot"></div>
-  </div>
- 
-</section>
+  </section>
 
   <!-- ══════ PHOTO PLEINE LARGEUR ══════ -->
   <div class="s-fullimg">
@@ -1634,72 +1471,49 @@
       }
     );
 
-    /* ══════ PROGRAMMES — défilement horizontal au scroll ══════ */
-(function () {
-  const programsSection = document.querySelector('.s-programs');
-  const progViewport    = document.querySelector('.prog-viewport');
-  const progTrack       = document.querySelector('.prog-track');
-  const progDots        = document.querySelectorAll('.prog-dot');
- 
-  if (!programsSection || !progViewport || !progTrack) return;
- 
-  /* ── animation d'entrée des cartes ── */
-  gsap.fromTo('.prog-item',
-    { opacity: 0, y: 36 },
-    {
-      opacity: 1, y: 0,
-      duration: 0.85,
-      ease: 'power3.out',
-      stagger: 0.14,
-      scrollTrigger: {
-        trigger: '.s-programs',
-        start: 'top 75%',
-        toggleActions: 'play none none reverse'
-      }
+    /* Programmes — défilement horizontal au scroll */
+    const programsSection = document.querySelector('.s-programs');
+    const progViewport = document.querySelector('.prog-viewport');
+    const progTrack = document.querySelector('.prog-track');
+
+    if (programsSection && progViewport && progTrack && window.matchMedia('(min-width: 901px)').matches) {
+      gsap.fromTo('.prog-item',
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.12,
+          scrollTrigger: { trigger: '.s-programs', start: 'top 78%', toggleActions: 'play none none reverse' }
+        }
+      );
+
+      const cardCount = progTrack.children.length;
+      gsap.to(progTrack, {
+        x: () => {
+          const step = progViewport.clientWidth * 0.82;
+          return -Math.max((cardCount - 1) * step, 0);
+        },
+        ease: 'none',
+        scrollTrigger: {
+          trigger: programsSection,
+          start: 'top top',
+          end: () => {
+            const step = progViewport.clientWidth * 0.82;
+            return `+=${Math.max((cardCount - 1) * step, 1)}`;
+          },
+          scrub: 1.2,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    } else {
+      gsap.utils.toArray('.prog-item').forEach((el, i) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.65, delay: i * 0.1,
+            scrollTrigger: { trigger: '.s-programs', start: 'top 85%', toggleActions: 'play none none reverse' }
+          }
+        );
+      });
     }
-  );
- 
-  /* ── défilement horizontal (desktop uniquement) ── */
-  if (!window.matchMedia('(min-width: 901px)').matches) return;
- 
-  const cardCount  = progTrack.children.length;       // 3
-  const TAIL_PX    = 160; // px de "respiration" sur la dernière carte avant de dépiner
- 
-  /* helper : met le bon dot actif */
-  function setActiveDot(index) {
-    progDots.forEach((d, i) => d.classList.toggle('active', i === index));
-  }
- 
-  const scrollTween = gsap.to(progTrack, {
-    x: () => {
-      const step = progViewport.clientWidth;
-      return -Math.max((cardCount - 1) * step, 0);
-    },
-    ease: 'none',
-    scrollTrigger: {
-      trigger: programsSection,
-      start: 'top top',
-      end: () => {
-        const step = progViewport.clientWidth;
-        /* distance totale = (n-1) cartes + TAIL_PX de respiration */
-        return `+=${Math.max((cardCount - 1) * step, 1) + TAIL_PX}`;
-      },
-      scrub: 1,            /* 1 = traîne 1s = fluide et naturel */
-      pin: true,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      /* ── mise à jour des dots en temps réel ── */
-      onUpdate: (self) => {
-        /* progress 0→1 sur la zone des cartes seulement (hors TAIL_PX) */
-        const totalDist    = (cardCount - 1) * progViewport.clientWidth;
-        const totalWithTail = totalDist + TAIL_PX;
-        const cardProgress  = Math.min(self.progress * totalWithTail / totalDist, 1);
-        const activeIndex   = Math.round(cardProgress * (cardCount - 1));
-        setActiveDot(Math.min(activeIndex, cardCount - 1));
-      }
-    }
-  });
-})();
 
     /* Photo pleine largeur parallax */
     gsap.to('.s-fullimg img', {
