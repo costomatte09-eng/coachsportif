@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IRON FORGE — Performance Studio</title>
+  <title>IRON FORGE — Bien-Être & Performance</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -165,10 +165,8 @@
       z-index: 2; will-change: transform; overflow: hidden;
     }
 
-    /* IMAGE HERO — remplace dzd.webp
-       Photo souhaitée : athlète en deadlift ou squat lourd,
-       cadrage vertical ou horizontal plein écran, fond sombre ou gym industrielle,
-       lumière dure, contrasté, style éditorial sportif */
+    /* ── Vidéo & image hero ── */
+    .island-wrapper video,
     .island-wrapper img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center 30%;
@@ -235,7 +233,6 @@
 
     /* ══════════════════════════════════════
        SECTION 1 — INTRO / CHIFFRES
-       Fond clair — transition après le hero
     ══════════════════════════════════════ */
     .s-intro {
       position: relative;
@@ -359,7 +356,6 @@
 
     /* ══════════════════════════════════════
        SECTION 2 — MÉTHODE
-       Fond sombre — 3 principes éditoriaux
     ══════════════════════════════════════ */
     .s-method {
       background: var(--mid);
@@ -426,7 +422,6 @@
 
     /* ══════════════════════════════════════
        SECTION 3 — COACH
-       Fond clair — split photo / bio
     ══════════════════════════════════════ */
     .s-coach {
       background: var(--dark);
@@ -438,11 +433,6 @@
     .coach-visual {
       position: relative;
       overflow: hidden;
-      /* IMAGE COACH — remplace images/coach-portrait.webp
-         Souhaitée : portrait vertical du coach en studio,
-         fond sombre (gris anthracite ou noir), éclairage latéral fort,
-         regard caméra, look sérieux, tenue sport sobre (pas criard),
-         format portrait 4:5 ou 3:4 */
     }
 
     .coach-visual img {
@@ -516,7 +506,7 @@
 
     /* ══════════════════════════════════════
        SECTION 4 — PROGRAMMES
-       3 offres — layout ligne éditorial
+       Grid 3 colonnes — compact, horizontal
     ══════════════════════════════════════ */
     .s-programs {
       background: var(--grey);
@@ -528,8 +518,8 @@
     .programs-header {
       display: flex; align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 4rem;
-      padding: 0 6rem;
+      margin-bottom: 3.5rem;
+      padding: 0 5rem;
     }
 
     .programs-header .h2-display { margin-bottom: 0; }
@@ -541,44 +531,40 @@
       text-align: right; padding-bottom: 0.4rem;
     }
 
+    /* ── Viewport : grid 3 colonnes desktop ── */
     .prog-viewport {
-      overflow: hidden;
-      padding: 0 6rem;
-      display: flex;
-      justify-content: center;
-      background: var(--grey);
+      padding: 0 5rem;
     }
 
     .prog-track {
-      display: flex;
-      gap: 0;
-      width: max-content;
-      will-change: transform;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
     }
 
+    /* ── Carte compacte ── */
     .prog-item {
-      --prog-card-size: min(70vh, calc(100vw - 12rem));
-      width: calc(var(--prog-card-size) * 0.72);
-      aspect-ratio: 2 / 3;
-      border-radius: 2.5rem;
-      margin-inline: calc((100vw - calc(var(--prog-card-size) * 0.72) - 12rem) / 2);
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 1.4rem;
-      padding: 2.2rem;
-      border: 1px solid rgba(255,69,0,0.24);
+      gap: 1.2rem;
+      padding: 2rem 1.8rem 2rem;
+      border-radius: 1.5rem;
+      margin-inline: 0;
+      border: 1px solid rgba(255,69,0,0.22);
       background:
-        radial-gradient(circle at 18% 14%, rgba(255,69,0,0.18) 0%, rgba(255,69,0,0.02) 45%, rgba(0,0,0,0) 70%),
+        radial-gradient(circle at 18% 14%, rgba(255,69,0,0.16) 0%, rgba(255,69,0,0.02) 45%, rgba(0,0,0,0) 70%),
         linear-gradient(155deg, #1f1b18 0%, #151311 55%, #0f0e0d 100%);
-      box-shadow: 0 22px 60px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(240,236,228,0.03);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(240,236,228,0.03);
       overflow: hidden;
       cursor: none;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
     .prog-item:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,69,0,0.58);
+      transform: translateY(-5px);
+      border-color: rgba(255,69,0,0.55);
     }
 
     .prog-num {
@@ -586,55 +572,65 @@
       font-size: 0.65rem; letter-spacing: 0.2em;
       color: var(--orange); align-self: start;
       border: 1px solid rgba(255,69,0,0.45);
-      padding: 0.35rem 0.55rem;
+      padding: 0.3rem 0.5rem;
     }
 
     .prog-name {
       font-family: var(--fd); font-weight: 900;
-      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-size: clamp(1.6rem, 2.2vw, 2.6rem);
       text-transform: uppercase; letter-spacing: -0.01em;
       line-height: 1; color: var(--cream);
     }
 
+    /* Ligne séparatrice légère */
+    .prog-divider {
+      width: 100%; height: 1px;
+      background: rgba(255,69,0,0.15);
+      flex-shrink: 0;
+    }
+
     .prog-details {
-      display: flex; flex-direction: column; gap: 0.5rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      flex: 1;
     }
 
     .prog-desc {
       font-family: var(--fb); font-weight: 300;
       font-size: 0.82rem; line-height: 1.7;
-      color: rgba(240,236,228,0.72); max-width: 38ch;
+      color: rgba(240,236,228,0.68);
     }
 
     .prog-tags {
-      display: flex; gap: 0.8rem; flex-wrap: wrap;
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
     }
 
     .prog-tag {
       font-family: var(--fd); font-weight: 700;
-      font-size: 0.58rem; letter-spacing: 0.22em;
+      font-size: 0.56rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--orange);
-      border: 1px solid rgba(255,69,0,0.35);
-      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(255,69,0,0.32);
+      padding: 0.28rem 0.6rem;
     }
 
     .prog-price {
       font-family: var(--fd); font-weight: 900;
-      font-size: clamp(2rem, 3vw, 3rem);
-      color: var(--cream); text-align: left;
-      white-space: nowrap;
+      font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+      color: var(--cream);
       margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(240,236,228,0.08);
     }
 
     .prog-price span {
       font-family: var(--fb); font-weight: 300;
       font-size: 0.7rem; letter-spacing: 0.15em;
-      color: rgba(240,236,228,0.5); display: block;
-      text-align: left; text-transform: uppercase;
+      color: rgba(240,236,228,0.45);
+      display: inline; margin-left: 0.3rem;
+      text-transform: uppercase;
     }
 
     /* ══════════════════════════════════════
-       SECTION 5 — RÉSULTATS / TÉMOIGNAGES
+       SECTION 5 — TÉMOIGNAGES
     ══════════════════════════════════════ */
     .s-results {
       background: var(--mid);
@@ -694,7 +690,6 @@
       background: rgba(255,69,0,0.15);
       border: 1px solid rgba(255,69,0,0.3);
       overflow: hidden; flex-shrink: 0;
-      /* IMAGE — petite photo avatar circulaire client (optionnel, sinon initiales) */
     }
 
     .testi-avatar-initials {
@@ -703,8 +698,6 @@
       font-family: var(--fd); font-weight: 700;
       font-size: 0.75rem; color: var(--orange);
     }
-
-    .testi-info {}
 
     .testi-name {
       font-family: var(--fd); font-weight: 700;
@@ -725,10 +718,6 @@
       position: relative; height: 55vh; overflow: hidden;
     }
 
-    /* IMAGE AMBIANCE — remplace images/gym-ambiance.webp
-       Souhaitée : ambiance salle de sport industrielle, grande salle,
-       lumières dures (néon ou spots), fonte et acier, perspective large,
-       pas d'athlète ou silhouette floue en fond, ambiance cinématique */
     .s-fullimg img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center 40%;
@@ -761,8 +750,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 0 6rem;
     }
-
-    .contact-left {}
 
     .contact-left .eyebrow { margin-bottom: 2rem; }
 
@@ -901,21 +888,21 @@
       .coach-visual { min-height: 55vw; }
       .coach-visual::after { background: linear-gradient(to bottom, transparent 70%, var(--dark)); }
       .coach-content { padding: 4rem 2rem; }
+
+      /* Programmes mobile : 1 colonne, scroll vertical */
       .s-programs { padding: 6rem 0; }
-      .programs-header { flex-direction: column; gap: 1.5rem; }
+      .programs-header { flex-direction: column; gap: 1.5rem; padding: 0 2rem; }
       .programs-sub { text-align: left; }
-      .programs-header, .prog-viewport { padding-left: 2rem; padding-right: 2rem; }
-      .prog-viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
-      .prog-track { gap: 1rem; }
-      .prog-item {
-        --prog-card-size: calc(100vw - 4rem);
-        width: calc(100vw - 4rem);
-        max-width: calc(100vw - 4rem);
-        min-height: auto;
-        aspect-ratio: 1 / 1;
-        margin-inline: 0;
-        scroll-snap-align: start;
+      .prog-viewport { padding: 0 2rem; }
+      .prog-track {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
       }
+      .prog-item {
+        border-radius: 1.2rem;
+        padding: 1.8rem;
+      }
+
       .s-results { padding: 6rem 2rem; }
       .testi-item { padding: 2.5rem 0; border-left: none !important; border-right: none !important; }
       .s-contact { padding: 6rem 2rem; gap: 4rem; }
@@ -924,6 +911,13 @@
       .corner { display: none; }
       .meta-top, .meta-bottom { padding: 0 1.5rem; }
       .fullimg-label { left: 2rem; }
+    }
+
+    /* Tablette intermédiaire : 2 colonnes */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .prog-track {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -945,9 +939,9 @@
     <div class="meta-top">
       <div>
         <div class="meta-label">Iron Forge</div>
-        <div class="meta-index">Performance Studio — Paris</div>
+        <div class="meta-index">Bien-Être & Performance — Paris</div>
       </div>
-      <div class="meta-tag">Est. 2024<br/>Season 01</div>
+      <div class="meta-tag">Est. 2024<br/>Saison 01</div>
     </div>
 
     <h1 class="hero-title" aria-label="Iron Forge">
@@ -956,11 +950,14 @@
       <span class="word forge-word forge"></span>
     </h1>
 
+    <!-- VIDÉO HERO — hero-video.mp4 à la racine du projet -->
     <div class="island-wrapper">
-      <!-- IMAGE HERO : athlète en deadlift lourd, fond gym industrielle,
-           éclairage dramatique, photo format paysage 1920×1080 -->
-      <img src="dzd.webp" alt="Athlète en deadlift — performance maximale"
-           width="1920" height="1080" fetchpriority="high" />
+      <video
+        autoplay muted loop playsinline
+        width="1920" height="1080"
+        aria-hidden="true">
+        <source src="hero-video.mp4" type="video/mp4" />
+      </video>
     </div>
 
     <div class="meta-bottom">
@@ -979,12 +976,12 @@
       <div class="intro-left">
         <div class="eyebrow">Programme Signature</div>
         <h2 class="h2-display">
-          Forge<br/>
+          Révèle<br/>
           <em>Ton</em>
-          Héritage
+          Équilibre
         </h2>
         <p class="body-text">
-          Un programme bâti sur les principes fondamentaux de la force brute. Pas de compromis, pas de raccourcis — seulement la progression systématique vers ta version la plus aboutie.
+          Un programme conçu pour unir la performance musculaire et le bien-être durable. Pas de méthodes extrêmes — une progression intelligente vers un corps plus fort, plus sain, et une énergie renouvelée au quotidien.
         </p>
         <a href="#contact" class="btn-primary">
           Démarrer maintenant
@@ -995,8 +992,8 @@
       </div>
       <div class="intro-right">
         <div class="intro-quote">
-          «&nbsp;La force ne se demande pas,<br/>
-          <span>elle se construit.</span>&nbsp;»
+          «&nbsp;Prendre soin de son corps,<br/>
+          <span>c'est investir dans sa vie.</span>&nbsp;»
         </div>
         <div class="stat-grid">
           <div class="stat-item">
@@ -1006,18 +1003,18 @@
           </div>
           <div class="stat-item">
             <div class="stat-bar"></div>
-            <div class="stat-n">4<sup>×</sup></div>
+            <div class="stat-n">3<sup>×</sup></div>
             <div class="stat-l">Sessions / semaine</div>
           </div>
           <div class="stat-item">
             <div class="stat-bar"></div>
-            <div class="stat-n">+38<sup>%</sup></div>
-            <div class="stat-l">Gain de force moyen</div>
+            <div class="stat-n">+40<sup>%</sup></div>
+            <div class="stat-l">Énergie ressentie</div>
           </div>
           <div class="stat-item">
             <div class="stat-bar"></div>
             <div class="stat-n">2K<sup>+</sup></div>
-            <div class="stat-l">Athlètes formés</div>
+            <div class="stat-l">Membres accompagnés</div>
           </div>
         </div>
       </div>
@@ -1034,9 +1031,9 @@
 
       <div class="method-item">
         <div class="method-num">01</div>
-        <div class="method-title">Diagnostic<br/>Initial</div>
+        <div class="method-title">Bilan<br/>Holistique</div>
         <p class="method-desc">
-          Avant tout programme, une évaluation complète. Force, mobilité, posture, historique — on ne part pas à l'aveugle. Le diagnostic détermine ton point de départ réel.
+          Avant tout programme, un bilan complet : condition physique, mobilité, habitudes de vie, niveaux de stress et objectifs santé. On part de toi, pas d'un modèle générique.
         </p>
       </div>
 
@@ -1044,15 +1041,15 @@
         <div class="method-num">02</div>
         <div class="method-title">Programme<br/>Sur Mesure</div>
         <p class="method-desc">
-          Aucun plan générique. Chaque séance est construite autour de tes objectifs, ton niveau, tes contraintes. La progression est calculée, jamais approximative.
+          Muscle, souplesse, récupération, nutrition — chaque plan est construit autour de ta réalité. L'équilibre entre effort et régénération est aussi important que l'entraînement lui-même.
         </p>
       </div>
 
       <div class="method-item">
         <div class="method-num">03</div>
-        <div class="method-title">Suivi &amp;<br/>Ajustements</div>
+        <div class="method-title">Suivi &amp;<br/>Bien-Être Global</div>
         <p class="method-desc">
-          Le corps s'adapte, le programme aussi. Feedback hebdomadaire, analyse des données, corrections en temps réel. L'entraînement intelligent n'est pas figé.
+          Le corps change, le programme évolue avec lui. Feedback hebdomadaire, ajustements en temps réel, attention portée au sommeil, à l'énergie et à la qualité de vie — pas seulement aux chiffres.
         </p>
       </div>
 
@@ -1062,18 +1059,15 @@
   <!-- ══════ COACH ══════ -->
   <section class="s-coach" id="coach">
     <div class="coach-visual">
-      <!-- IMAGE PORTRAIT COACH : portrait vertical, format 3:4 ou 4:5,
-           fond sombre/studio, éclairage latéral, regard caméra direct,
-           tenue sport sobre (noir), expression sérieuse, ambiance cinéma -->
       <img src="images/coach-portrait.webp"
-           alt="Portrait du coach" width="900" height="1200" loading="lazy" decoding="async" />
+           alt="Portrait du coach Mathieu Laurent" width="900" height="1200" loading="lazy" decoding="async" />
     </div>
     <div class="coach-content">
       <div class="eyebrow">Le coach</div>
       <h2 class="coach-name">Mathieu<br/>Laurent</h2>
-      <div class="coach-title">Coach Performance — Préparateur Physique</div>
+      <div class="coach-title">Coach Bien-Être & Performance — Préparateur Physique</div>
       <p class="coach-bio">
-        10 ans passés à transformer des corps et des mentalités. Ancien athlète de compétition, spécialisé en force athlétique et préparation physique générale. Pas de méthodes miracles — des fondamentaux exécutés avec discipline et rigueur.
+        10 ans passés à accompagner des personnes vers une meilleure version d'elles-mêmes — plus fortes, plus saines, plus équilibrées. Ancien athlète de compétition reconverti dans l'accompagnement global, Mathieu marie développement musculaire, santé durable et bien-être mental dans chaque suivi.
       </p>
       <div class="coach-creds">
         <div class="cred-item">
@@ -1086,11 +1080,11 @@
         </div>
         <div class="cred-item">
           <div class="cred-dot"></div>
-          <div class="cred-text"><strong>Préparateur physique</strong> — 3 équipes semi-pro</div>
+          <div class="cred-text"><strong>Nutrition & Bien-Être</strong> — Formation spécialisée</div>
         </div>
         <div class="cred-item">
           <div class="cred-dot"></div>
-          <div class="cred-text"><strong>Spécialisation</strong> — Force, Hypertrophie, Reconditionnement</div>
+          <div class="cred-text"><strong>Spécialisation</strong> — Muscle, Mobilité, Rééquilibrage</div>
         </div>
       </div>
     </div>
@@ -1104,59 +1098,56 @@
         <h2 class="h2-display" style="color:var(--dark)">Programmes</h2>
       </div>
       <p class="programs-sub">
-        Trois niveaux d'accompagnement. Du suivi à distance au coaching individuel intensif. Choisir, c'est déjà commencer.
+        Trois niveaux d'accompagnement. Du suivi à distance au coaching individuel complet. Choisir, c'est déjà commencer.
       </p>
     </div>
 
     <div class="prog-viewport">
       <div class="prog-track">
 
-      <div class="prog-item">
-        <div class="prog-num">01</div>
-        <div class="prog-name">Online<br/>Program</div>
-        <div class="prog-details">
-          <p class="prog-desc">Programme personnalisé à distance. Accès à l'application de suivi, check-in hebdomadaire, ajustements mensuels.</p>
-          <div class="prog-tags">
-            <span class="prog-tag">12 semaines</span>
-            <span class="prog-tag">À distance</span>
-            <span class="prog-tag">Tous niveaux</span>
+        <div class="prog-item">
+          <div class="prog-num">01</div>
+          <div class="prog-name">Online<br/>Bien-Être</div>
+          <div class="prog-divider"></div>
+          <div class="prog-details">
+            <p class="prog-desc">Programme personnalisé à distance. Entraînement, conseils nutrition, check-in hebdomadaire et ajustements mensuels pour progresser à ton rythme.</p>
+            <div class="prog-tags">
+              <span class="prog-tag">12 semaines</span>
+              <span class="prog-tag">À distance</span>
+              <span class="prog-tag">Tous niveaux</span>
+            </div>
           </div>
+          <div class="prog-price">149€<span>/ mois</span></div>
         </div>
-        <div class="prog-price">
-          149€<span>/ mois</span>
-        </div>
-      </div>
 
-      <div class="prog-item">
-        <div class="prog-num">02</div>
-        <div class="prog-name">Coaching<br/>Hybride</div>
-        <div class="prog-details">
-          <p class="prog-desc">2 séances mensuelles en présentiel + suivi complet en ligne. Le meilleur des deux mondes pour une progression contrôlée.</p>
-          <div class="prog-tags">
-            <span class="prog-tag">Présentiel + online</span>
-            <span class="prog-tag">Bilan mensuel</span>
+        <div class="prog-item">
+          <div class="prog-num">02</div>
+          <div class="prog-name">Coaching<br/>Hybride</div>
+          <div class="prog-divider"></div>
+          <div class="prog-details">
+            <p class="prog-desc">2 séances mensuelles en présentiel + suivi complet en ligne. Muscle, souplesse et bien-être travaillés ensemble, avec un bilan mensuel approfondi.</p>
+            <div class="prog-tags">
+              <span class="prog-tag">Présentiel + online</span>
+              <span class="prog-tag">Bilan mensuel</span>
+            </div>
           </div>
+          <div class="prog-price">290€<span>/ mois</span></div>
         </div>
-        <div class="prog-price">
-          290€<span>/ mois</span>
-        </div>
-      </div>
 
-      <div class="prog-item">
-        <div class="prog-num">03</div>
-        <div class="prog-name">Coaching<br/>Élite</div>
-        <div class="prog-details">
-          <p class="prog-desc">Accompagnement premium illimité. Séances hebdomadaires, nutrition, récupération, analyse vidéo. Pour ceux qui ne font pas les choses à moitié.</p>
-          <div class="prog-tags">
-            <span class="prog-tag">Illimité</span>
-            <span class="prog-tag">Nutrition incluse</span>
-            <span class="prog-tag">Analyse vidéo</span>
+        <div class="prog-item">
+          <div class="prog-num">03</div>
+          <div class="prog-name">Coaching<br/>Premium</div>
+          <div class="prog-divider"></div>
+          <div class="prog-details">
+            <p class="prog-desc">Accompagnement complet illimité. Séances hebdomadaires, nutrition, sommeil, récupération, analyse vidéo. Pour ceux qui veulent tout transformer — corps et habitudes de vie.</p>
+            <div class="prog-tags">
+              <span class="prog-tag">Illimité</span>
+              <span class="prog-tag">Nutrition incluse</span>
+              <span class="prog-tag">Suivi bien-être</span>
+            </div>
           </div>
+          <div class="prog-price">490€<span>/ mois</span></div>
         </div>
-        <div class="prog-price">
-          490€<span>/ mois</span>
-        </div>
-      </div>
 
       </div>
     </div>
@@ -1164,12 +1155,8 @@
 
   <!-- ══════ PHOTO PLEINE LARGEUR ══════ -->
   <div class="s-fullimg">
-    <!-- IMAGE AMBIANCE GYM : salle de sport industrielle vue large,
-         lumières dures, néons ou spots, fonte et barres au sol,
-         perspective profonde, ambiance cinématique, pas de personne
-         ou silhouette floue en arrière-plan -->
     <img id="ambience-image" src="images/gimp-ambience.webp"
-         alt="Ambiance salle de sport Iron Forge"
+         alt="Ambiance studio Iron Forge"
          width="1920" height="800" loading="lazy" decoding="async" />
     <div class="fullimg-label">Paris — 2024</div>
   </div>
@@ -1188,19 +1175,19 @@
 
       <div class="testi-item">
         <span class="testi-mark">"</span>
-        <p class="testi-text">En 12 semaines j'ai gagné 15 kg sur mon deadlift. Ce n'est pas de la chance — c'est la méthode.</p>
+        <p class="testi-text">En 3 mois j'ai retrouvé une énergie que je n'avais plus depuis des années. Muscle et bien-être en même temps — c'est possible.</p>
         <div class="testi-author">
           <div class="testi-avatar"><div class="testi-avatar-initials">TM</div></div>
           <div class="testi-info">
             <div class="testi-name">Thomas M.</div>
-            <div class="testi-meta">Programme Élite — 8 mois</div>
+            <div class="testi-meta">Coaching Premium — 8 mois</div>
           </div>
         </div>
       </div>
 
       <div class="testi-item">
         <span class="testi-mark">"</span>
-        <p class="testi-text">Première fois que je comprends vraiment pourquoi je fais chaque exercice. Le suivi est chirurgical.</p>
+        <p class="testi-text">Première fois que je comprends vraiment mon corps. L'approche globale — entraînement, nutrition, récupération — a tout changé.</p>
         <div class="testi-author">
           <div class="testi-avatar"><div class="testi-avatar-initials">SL</div></div>
           <div class="testi-info">
@@ -1212,24 +1199,24 @@
 
       <div class="testi-item">
         <span class="testi-mark">"</span>
-        <p class="testi-text">Après deux blessures et des années sans progression — Iron Forge m'a remis sur les rails. Structuré, exigeant, efficace.</p>
+        <p class="testi-text">Après deux blessures et des années sans progression — Iron Forge m'a remis sur les rails. Structuré, bienveillant, efficace.</p>
         <div class="testi-author">
           <div class="testi-avatar"><div class="testi-avatar-initials">AR</div></div>
           <div class="testi-info">
             <div class="testi-name">Antoine R.</div>
-            <div class="testi-meta">Online Program — 12 semaines</div>
+            <div class="testi-meta">Online Bien-Être — 12 semaines</div>
           </div>
         </div>
       </div>
 
       <div class="testi-item">
         <span class="testi-mark">"</span>
-        <p class="testi-text">−11 kg en 16 semaines, sans perdre en force. Je n'aurais pas cru ça possible avant d'avoir essayé.</p>
+        <p class="testi-text">−11 kg en 16 semaines sans sacrifier ma santé ni mon énergie. Un rééquilibrage complet, pas un régime brutal.</p>
         <div class="testi-author">
           <div class="testi-avatar"><div class="testi-avatar-initials">CB</div></div>
           <div class="testi-info">
             <div class="testi-name">Clara B.</div>
-            <div class="testi-meta">Programme Élite — 4 mois</div>
+            <div class="testi-meta">Coaching Premium — 4 mois</div>
           </div>
         </div>
       </div>
@@ -1247,7 +1234,7 @@
         Offerte
       </h2>
       <p class="contact-body">
-        30 minutes pour faire le point sur tes objectifs, ton niveau et définir si on est faits pour travailler ensemble. Sans engagement, sans bullshit.
+        30 minutes pour faire le point sur ton mode de vie, tes objectifs santé et définir ensemble le meilleur point de départ. Sans engagement, sans pression.
       </p>
       <div class="contact-info">
         <div class="contact-line">
@@ -1275,11 +1262,11 @@
       </div>
       <div class="form-field">
         <label>Programme visé</label>
-        <input type="text" placeholder="Online, Hybride, Élite..." />
+        <input type="text" placeholder="Online, Hybride, Premium..." />
       </div>
       <div class="form-field">
-        <label>Ton objectif en une phrase</label>
-        <textarea placeholder="Ex. Augmenter mon squat de 40 kg en 6 mois..."></textarea>
+        <label>Ton objectif bien-être en une phrase</label>
+        <textarea placeholder="Ex. Retrouver de l'énergie, prendre du muscle, me sentir mieux dans mon corps..."></textarea>
       </div>
       <div class="form-submit">
         <span class="form-note">Aucun spam. Jamais.</span>
@@ -1307,13 +1294,6 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    /* ── Image ambiance centralisée ── */
-    const AMBIENCE_IMAGE_PATH = 'images/gimp-ambience.webp';
-    const ambienceImage = document.getElementById('ambience-image');
-    if (ambienceImage) {
-      ambienceImage.src = AMBIENCE_IMAGE_PATH;
-    }
-
     /* ── Curseur ── */
     const cur = document.getElementById('cur');
     const ring = document.getElementById('ring');
@@ -1327,7 +1307,7 @@
 
     (function animRing() {
       rx += (mx - rx) * 0.12;
-      ry += (my - ry) *.12;
+      ry += (my - ry) * 0.12;
       ring.style.left = rx + 'px';
       ring.style.top  = ry + 'px';
       requestAnimationFrame(animRing);
@@ -1382,7 +1362,7 @@
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.7 }, '-=0.5');
 
-    /* ── Parallax hero ── */
+    /* ── Parallax hero — cible video et img ── */
     gsap.to('.hero-title', {
       yPercent: -170, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
@@ -1391,7 +1371,8 @@
       yPercent: 18, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
     });
-    gsap.to('.island-wrapper img', {
+    /* Cible video OU img selon ce qui est présent dans le wrapper */
+    gsap.to('.island-wrapper video, .island-wrapper img', {
       scale: 1.12, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
     });
@@ -1471,49 +1452,15 @@
       }
     );
 
-    /* Programmes — défilement horizontal au scroll */
-    const programsSection = document.querySelector('.s-programs');
-    const progViewport = document.querySelector('.prog-viewport');
-    const progTrack = document.querySelector('.prog-track');
-
-    if (programsSection && progViewport && progTrack && window.matchMedia('(min-width: 901px)').matches) {
-      gsap.fromTo('.prog-item',
-        { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 0.7, stagger: 0.12,
-          scrollTrigger: { trigger: '.s-programs', start: 'top 78%', toggleActions: 'play none none reverse' }
+    /* ── Programmes — simple reveal en grille (plus de pin GSAP) ── */
+    gsap.utils.toArray('.prog-item').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.7, delay: i * 0.14, ease: 'power2.out',
+          scrollTrigger: { trigger: '.s-programs', start: 'top 75%', toggleActions: 'play none none reverse' }
         }
       );
-
-      const cardCount = progTrack.children.length;
-      gsap.to(progTrack, {
-        x: () => {
-          const step = progViewport.clientWidth * 0.82;
-          return -Math.max((cardCount - 1) * step, 0);
-        },
-        ease: 'none',
-        scrollTrigger: {
-          trigger: programsSection,
-          start: 'top top',
-          end: () => {
-            const step = progViewport.clientWidth * 0.82;
-            return `+=${Math.max((cardCount - 1) * step, 1)}`;
-          },
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
-    } else {
-      gsap.utils.toArray('.prog-item').forEach((el, i) => {
-        gsap.fromTo(el,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.65, delay: i * 0.1,
-            scrollTrigger: { trigger: '.s-programs', start: 'top 85%', toggleActions: 'play none none reverse' }
-          }
-        );
-      });
-    }
+    });
 
     /* Photo pleine largeur parallax */
     gsap.to('.s-fullimg img', {
