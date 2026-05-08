@@ -102,29 +102,30 @@
       z-index: 12; opacity: 0; pointer-events: none;
     }
 
+    /* ── Hero title : plus solide, moins lumineux ── */
     .hero-title {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-family: var(--fd);
       font-weight: 900;
-      font-size: clamp(6rem, 18vw, 22rem);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
+      font-size: clamp(4.5rem, 13vw, 17rem);
+      line-height: 0.88;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
-      color: rgba(240,236,228,0.06);
-      -webkit-text-stroke: 2px rgba(240,236,228,0.65);
-      text-shadow: 0 0 80px rgba(240,236,228,0.06), 0 0 200px rgba(240,236,228,0.03);
+      color: rgba(240,236,228,0.92);
+      -webkit-text-stroke: 0px;
+      text-shadow: none;
       white-space: nowrap;
       user-select: none;
       z-index: 8;
       will-change: transform, opacity;
+      text-align: center;
     }
 
-    .hero-title .forge {
-      color: rgba(255,69,0,0.06);
-      -webkit-text-stroke: 2px rgba(255,69,0,0.80);
-      text-shadow: 0 0 60px rgba(255,69,0,0.22), 0 0 140px rgba(255,69,0,0.10);
+    .hero-title .bienetre {
+      color: var(--orange);
+      display: block;
     }
 
     .hero-title .char {
@@ -165,8 +166,7 @@
       z-index: 2; will-change: transform; overflow: hidden;
     }
 
-    /* ── Vidéo & image hero ── */
-    .island-wrapper video,
+    /* ── Image hero (remplace la vidéo) ── */
     .island-wrapper img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center 30%;
@@ -232,12 +232,14 @@
     .hero-title, .island-wrapper, .meta-top, .meta-bottom, .hero-line, .scan-line { opacity: 0; }
 
     /* ══════════════════════════════════════
-       SECTION 1 — INTRO / CHIFFRES
+       SECTION 1 — INTRO REDESIGNÉE
     ══════════════════════════════════════ */
     .s-intro {
       position: relative;
       background: var(--grey);
       z-index: 20;
+      display: flex;
+      flex-direction: column;
     }
 
     .s-intro::before {
@@ -245,19 +247,167 @@
       position: absolute; top: 0; left: 0; right: 0;
       height: 3px; background: var(--orange);
       transform: scaleX(0); transform-origin: left;
+      z-index: 2;
     }
 
-    .intro-grid {
+    /* Filigrane */
+    .s-intro::after {
+      content: 'FORCE';
+      position: absolute; bottom: -3rem; right: -1rem;
+      font-family: var(--fd); font-weight: 900;
+      font-size: 22vw; line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(17,16,16,0.06);
+      user-select: none; pointer-events: none;
+      letter-spacing: -0.02em; white-space: nowrap;
+    }
+
+    /* ── Barre du haut ── */
+    .intro-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 6rem;
+      border-bottom: 1px solid rgba(17,16,16,0.1);
+      position: relative; z-index: 1;
+    }
+
+    .intro-topbar-meta {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.62rem; letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(17,16,16,0.35);
+    }
+
+    /* ── Grille principale ── */
+    .intro-main {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 400px;
+      flex: 1;
+      min-height: 62vh;
     }
 
-    .intro-left {
-      padding: 7rem 4rem 7rem 6rem;
-      display: flex; flex-direction: column; justify-content: center;
-      border-right: 1px solid rgba(17,16,16,0.10);
+    .intro-title-col {
+      padding: 5.5rem 6rem 5.5rem;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid rgba(17,16,16,0.1);
+      position: relative; overflow: hidden;
     }
 
+    /* Ligne verticale décorative orange */
+    .intro-title-col::before {
+      content: '';
+      position: absolute; left: 3.5rem; top: 4rem; bottom: 4rem;
+      width: 1.5px;
+      background: linear-gradient(to bottom, transparent, var(--orange) 25%, var(--orange) 75%, transparent);
+    }
+
+    .intro-headline {
+      font-family: var(--fd);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1em;
+    }
+
+    /* "RÉVÈLE" — contour, grand */
+    .ih-line-1 {
+      font-size: clamp(4.2rem, 8.5vw, 10.5rem);
+      color: transparent;
+      -webkit-text-stroke: 2px var(--dark);
+      opacity: 0; transform: translateX(-40px);
+    }
+
+    /* "TON" — rempli orange, décalé à droite, plus petit */
+    .ih-line-2 {
+      font-size: clamp(2rem, 3.8vw, 4.8rem);
+      color: var(--orange);
+      padding-left: 2.5rem;
+      letter-spacing: 0.18em;
+      opacity: 0; transform: translateX(30px);
+    }
+
+    /* "ÉQUILIBRE" — rempli sombre, grand */
+    .ih-line-3 {
+      font-size: clamp(4.2rem, 8.5vw, 10.5rem);
+      color: var(--dark);
+      opacity: 0; transform: translateX(-40px);
+    }
+
+    /* ── Colonne droite dark ── */
+    .intro-content-col {
+      background: var(--dark);
+      padding: 4.5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .intro-feature-stat {
+      padding-bottom: 2.2rem;
+      border-bottom: 1px solid rgba(240,236,228,0.1);
+    }
+
+    .ifs-number {
+      font-family: var(--fd); font-weight: 900;
+      font-size: clamp(4rem, 5.5vw, 6.5rem);
+      line-height: 1; color: var(--orange);
+    }
+
+    .ifs-number sup {
+      font-size: 0.38em; vertical-align: super;
+    }
+
+    .ifs-label {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.8rem; line-height: 1.7;
+      color: rgba(240,236,228,0.5);
+      margin-top: 0.6rem; max-width: 22ch;
+    }
+
+    .intro-content-col .body-text {
+      color: rgba(240,236,228,0.5);
+      margin-bottom: 0; max-width: 100%;
+    }
+
+    /* ── Bande des stats ── */
+    .intro-stats-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 2px solid var(--dark);
+      position: relative; z-index: 1;
+    }
+
+    .isb-item {
+      padding: 2.2rem 6rem 2.2rem 2.5rem;
+      border-right: 1px solid rgba(17,16,16,0.1);
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+
+    .isb-item:last-child { border-right: none; }
+
+    .isb-n {
+      font-family: var(--fd); font-weight: 900;
+      font-size: clamp(2rem, 3vw, 3.5rem);
+      line-height: 1; color: var(--dark);
+    }
+
+    .isb-n sup {
+      font-size: 0.38em; vertical-align: super; color: var(--orange);
+    }
+
+    .isb-l {
+      font-family: var(--fb); font-weight: 300;
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(17,16,16,0.4);
+    }
+
+    /* Classes globales réutilisées */
     .eyebrow {
       font-family: var(--fd); font-weight: 700;
       font-size: 0.62rem; letter-spacing: 0.32em;
@@ -304,55 +454,8 @@
 
     .btn-primary:hover::before { transform: translateX(110%) skewX(-18deg); }
     .btn-primary:hover { background: #e03d00; gap: 1.5rem; }
-
     .btn-primary svg { transition: transform 0.2s; }
     .btn-primary:hover svg { transform: translateX(3px); }
-
-    .intro-right {
-      padding: 7rem 6rem 7rem 4rem;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-
-    .intro-quote {
-      font-family: var(--fd); font-weight: 700;
-      font-size: clamp(1.15rem, 1.8vw, 1.6rem);
-      line-height: 1.35; text-transform: uppercase;
-      color: var(--dark);
-      padding-bottom: 3.5rem;
-      border-bottom: 1px solid rgba(17,16,16,0.12);
-      margin-bottom: 3.5rem;
-    }
-
-    .intro-quote span { color: var(--orange); }
-
-    .stat-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2.8rem;
-    }
-
-    .stat-item { display: flex; flex-direction: column; gap: 0.35rem; }
-
-    .stat-bar {
-      width: 0; height: 1.5px;
-      background: var(--orange);
-      margin-bottom: 0.6rem;
-      transition: width 0.7s ease;
-    }
-
-    .stat-item.in-view .stat-bar { width: 2.5rem; }
-
-    .stat-n {
-      font-family: var(--fd); font-weight: 900;
-      font-size: clamp(2.4rem, 3.8vw, 4.2rem);
-      line-height: 1; color: var(--dark);
-    }
-
-    .stat-n sup { font-size: 0.38em; vertical-align: super; color: var(--orange); }
-
-    .stat-l {
-      font-family: var(--fb); font-weight: 300;
-      font-size: 0.68rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(17,16,16,0.42);
-    }
 
     /* ══════════════════════════════════════
        SECTION 2 — MÉTHODE
@@ -506,11 +609,10 @@
 
     /* ══════════════════════════════════════
        SECTION 4 — PROGRAMMES
-       Grid 3 colonnes — compact, horizontal
+       Scroll horizontal (desktop) · GSAP pin
     ══════════════════════════════════════ */
     .s-programs {
       background: var(--grey);
-      padding: 8rem 0;
       position: relative;
       overflow: hidden;
     }
@@ -518,8 +620,8 @@
     .programs-header {
       display: flex; align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 3.5rem;
-      padding: 0 5rem;
+      padding: 5rem 6rem 3rem;
+      border-bottom: 1px solid rgba(17,16,16,0.1);
     }
 
     .programs-header .h2-display { margin-bottom: 0; }
@@ -531,27 +633,62 @@
       text-align: right; padding-bottom: 0.4rem;
     }
 
-    /* ── Viewport : grid 3 colonnes desktop ── */
+    /* ── Desktop : viewport + track horizontal ── */
     .prog-viewport {
-      padding: 0 5rem;
-    }
-
-    .prog-track {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      overflow: hidden;
       width: 100%;
     }
 
-    /* ── Carte compacte ── */
+    /* Desktop */
+    @media (min-width: 901px) {
+      .s-programs {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .programs-header {
+        flex-shrink: 0;
+      }
+
+      .prog-viewport {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .prog-track {
+        display: flex;
+        flex-direction: row;
+        width: 300vw;
+        align-items: stretch;
+        gap: 0;
+        will-change: transform;
+      }
+
+      .prog-slide {
+        width: 100vw;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3.5rem 4rem 4rem;
+      }
+
+      .prog-item {
+        width: 100%;
+        max-width: 520px;
+      }
+    }
+
+    /* ── Carte visuelle ── */
     .prog-item {
-      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
-      padding: 2rem 1.8rem 2rem;
+      padding: 2.2rem 2rem 2.2rem;
       border-radius: 1.5rem;
-      margin-inline: 0;
       border: 1px solid rgba(255,69,0,0.22);
       background:
         radial-gradient(circle at 18% 14%, rgba(255,69,0,0.16) 0%, rgba(255,69,0,0.02) 45%, rgba(0,0,0,0) 70%),
@@ -577,12 +714,11 @@
 
     .prog-name {
       font-family: var(--fd); font-weight: 900;
-      font-size: clamp(1.6rem, 2.2vw, 2.6rem);
+      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
       text-transform: uppercase; letter-spacing: -0.01em;
       line-height: 1; color: var(--cream);
     }
 
-    /* Ligne séparatrice légère */
     .prog-divider {
       width: 100%; height: 1px;
       background: rgba(255,69,0,0.15);
@@ -627,6 +763,27 @@
       color: rgba(240,236,228,0.45);
       display: inline; margin-left: 0.3rem;
       text-transform: uppercase;
+    }
+
+    /* Indicateur de navigation */
+    .prog-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 2rem;
+      flex-shrink: 0;
+    }
+
+    .prog-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(17,16,16,0.2);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .prog-dot.active {
+      background: var(--orange);
+      transform: scale(1.4);
     }
 
     /* ══════════════════════════════════════
@@ -877,47 +1034,84 @@
        RESPONSIVE
     ══════════════════════════════════════ */
     @media (max-width: 900px) {
-      .intro-grid, .s-coach, .testimonials, .s-contact {
-        grid-template-columns: 1fr;
+      /* Intro */
+      .intro-topbar { padding: 2rem; }
+      .intro-main { grid-template-columns: 1fr; }
+      .intro-title-col {
+        padding: 4rem 2rem;
+        border-right: none;
+        border-bottom: none;
       }
-      .intro-left { padding: 5rem 2rem 3rem; border-right: none; border-bottom: 1px solid rgba(17,16,16,0.1); }
-      .intro-right { padding: 3rem 2rem 5rem; }
+      .intro-title-col::before { display: none; }
+      .intro-content-col { padding: 3rem 2rem; }
+      .intro-stats-band { grid-template-columns: repeat(2, 1fr); }
+      .isb-item { padding: 1.8rem 2rem; }
+      .isb-item:nth-child(2) { border-right: none; }
+
+      /* Méthode */
       .method-header, .method-list { padding-left: 2rem; padding-right: 2rem; }
       .method-item { grid-template-columns: 3.5rem 1fr; gap: 2rem; }
       .method-desc { grid-column: 2; padding-top: 0; }
+
+      /* Coach */
+      .s-coach { grid-template-columns: 1fr; }
       .coach-visual { min-height: 55vw; }
       .coach-visual::after { background: linear-gradient(to bottom, transparent 70%, var(--dark)); }
       .coach-content { padding: 4rem 2rem; }
 
-      /* Programmes mobile : 1 colonne, scroll vertical */
-      .s-programs { padding: 6rem 0; }
-      .programs-header { flex-direction: column; gap: 1.5rem; padding: 0 2rem; }
+      /* Programmes mobile : grille verticale */
+      .s-programs {
+        padding: 5rem 0 0;
+        min-height: unset !important;
+        display: block !important;
+      }
+      .programs-header { flex-direction: column; gap: 1.5rem; padding: 0 2rem 3rem; }
       .programs-sub { text-align: left; }
-      .prog-viewport { padding: 0 2rem; }
+      .prog-viewport {
+        padding: 0 2rem;
+        overflow: visible !important;
+      }
       .prog-track {
-        grid-template-columns: 1fr;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
         gap: 1.2rem;
+        transform: none !important;
+      }
+      .prog-slide {
+        width: 100% !important;
+        display: block !important;
+        padding: 0 !important;
       }
       .prog-item {
+        max-width: 100% !important;
         border-radius: 1.2rem;
         padding: 1.8rem;
+        margin-bottom: 0;
+      }
+      .prog-nav { padding: 1.5rem 2rem 3rem; }
+
+      /* Tablette 2 colonnes */
+      @media (min-width: 601px) {
+        .prog-track { grid-template-columns: repeat(2, 1fr) !important; }
       }
 
+      /* Résultats */
+      .testimonials { grid-template-columns: 1fr; }
       .s-results { padding: 6rem 2rem; }
       .testi-item { padding: 2.5rem 0; border-left: none !important; border-right: none !important; }
-      .s-contact { padding: 6rem 2rem; gap: 4rem; }
+
+      /* Contact */
+      .s-contact { grid-template-columns: 1fr; padding: 6rem 2rem; gap: 4rem; }
+
+      /* Footer */
       .footer { padding: 2.5rem 2rem; flex-direction: column; gap: 1.5rem; text-align: center; }
-      .hero-title { font-size: clamp(5rem, 22vw, 10rem); -webkit-text-stroke: 1.5px rgba(240,236,228,0.60); }
+
+      /* Hero */
+      .hero-title { font-size: clamp(4rem, 18vw, 9rem); }
       .corner { display: none; }
       .meta-top, .meta-bottom { padding: 0 1.5rem; }
       .fullimg-label { left: 2rem; }
-    }
-
-    /* Tablette intermédiaire : 2 colonnes */
-    @media (min-width: 601px) and (max-width: 900px) {
-      .prog-track {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
   </style>
 </head>
@@ -944,20 +1138,20 @@
       <div class="meta-tag">Est. 2024<br/>Saison 01</div>
     </div>
 
-    <h1 class="hero-title" aria-label="Iron Forge">
-      <span class="word iron-word"></span>
+    <h1 class="hero-title" aria-label="Santé et Bien-Être">
+      <span class="word sante-word"></span>
       <span class="word-break"></span>
-      <span class="word forge-word forge"></span>
+      <span class="word bienetre-word bienetre"></span>
     </h1>
 
-    <!-- VIDÉO HERO — hero-video.mp4 à la racine du projet -->
+    <!-- IMAGE HERO — dzd.webp -->
     <div class="island-wrapper">
-      <video
-        autoplay muted loop playsinline
+      <img
+        src="images/dzd.webp"
+        alt="Studio Iron Forge — Bien-Être & Performance Paris"
         width="1920" height="1080"
-        aria-hidden="true">
-        <source src="hero-video.mp4" type="video/mp4" />
-      </video>
+        fetchpriority="high"
+        decoding="async" />
     </div>
 
     <div class="meta-bottom">
@@ -970,18 +1164,35 @@
     </div>
   </section>
 
-  <!-- ══════ INTRO / CHIFFRES ══════ -->
+  <!-- ══════ INTRO REDESIGNÉE ══════ -->
   <section class="s-intro">
-    <div class="intro-grid">
-      <div class="intro-left">
-        <div class="eyebrow">Programme Signature</div>
-        <h2 class="h2-display">
-          Révèle<br/>
-          <em>Ton</em>
-          Équilibre
+
+    <!-- Barre du haut -->
+    <div class="intro-topbar">
+      <div class="eyebrow" style="margin-bottom:0">Programme Signature</div>
+      <div class="intro-topbar-meta">Paris · Est. 2024 · Bien-Être</div>
+    </div>
+
+    <!-- Grille principale -->
+    <div class="intro-main">
+
+      <!-- Colonne titre -->
+      <div class="intro-title-col">
+        <h2 class="intro-headline" aria-label="Révèle Ton Équilibre">
+          <span class="ih-line ih-line-1">Révèle</span>
+          <span class="ih-line ih-line-2">Ton</span>
+          <span class="ih-line ih-line-3">Équilibre</span>
         </h2>
+      </div>
+
+      <!-- Colonne contenu dark -->
+      <div class="intro-content-col">
+        <div class="intro-feature-stat">
+          <div class="ifs-number">+40<sup>%</sup></div>
+          <div class="ifs-label">d'énergie ressentie dès les premières semaines de programme</div>
+        </div>
         <p class="body-text">
-          Un programme conçu pour unir la performance musculaire et le bien-être durable. Pas de méthodes extrêmes — une progression intelligente vers un corps plus fort, plus sain, et une énergie renouvelée au quotidien.
+          Un programme conçu pour unir la performance musculaire et le bien-être durable. Pas de méthodes extrêmes — une progression intelligente vers un corps plus fort, plus sain, et une énergie renouvelée.
         </p>
         <a href="#contact" class="btn-primary">
           Démarrer maintenant
@@ -990,35 +1201,28 @@
           </svg>
         </a>
       </div>
-      <div class="intro-right">
-        <div class="intro-quote">
-          «&nbsp;Prendre soin de son corps,<br/>
-          <span>c'est investir dans sa vie.</span>&nbsp;»
-        </div>
-        <div class="stat-grid">
-          <div class="stat-item">
-            <div class="stat-bar"></div>
-            <div class="stat-n">12<sup>sem</sup></div>
-            <div class="stat-l">Durée programme</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-bar"></div>
-            <div class="stat-n">3<sup>×</sup></div>
-            <div class="stat-l">Sessions / semaine</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-bar"></div>
-            <div class="stat-n">+40<sup>%</sup></div>
-            <div class="stat-l">Énergie ressentie</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-bar"></div>
-            <div class="stat-n">2K<sup>+</sup></div>
-            <div class="stat-l">Membres accompagnés</div>
-          </div>
-        </div>
+    </div>
+
+    <!-- Bande des stats -->
+    <div class="intro-stats-band">
+      <div class="isb-item">
+        <div class="isb-n">12<sup>sem</sup></div>
+        <div class="isb-l">Durée programme</div>
+      </div>
+      <div class="isb-item">
+        <div class="isb-n">3<sup>×</sup></div>
+        <div class="isb-l">Sessions / semaine</div>
+      </div>
+      <div class="isb-item">
+        <div class="isb-n">2K<sup>+</sup></div>
+        <div class="isb-l">Membres accompagnés</div>
+      </div>
+      <div class="isb-item">
+        <div class="isb-n">100<sup>%</sup></div>
+        <div class="isb-l">Sur mesure</div>
       </div>
     </div>
+
   </section>
 
   <!-- ══════ MÉTHODE ══════ -->
@@ -1090,7 +1294,7 @@
     </div>
   </section>
 
-  <!-- ══════ PROGRAMMES ══════ -->
+  <!-- ══════ PROGRAMMES — SCROLL HORIZONTAL ══════ -->
   <section class="s-programs" id="programmes">
     <div class="programs-header">
       <div>
@@ -1105,52 +1309,69 @@
     <div class="prog-viewport">
       <div class="prog-track">
 
-        <div class="prog-item">
-          <div class="prog-num">01</div>
-          <div class="prog-name">Online<br/>Bien-Être</div>
-          <div class="prog-divider"></div>
-          <div class="prog-details">
-            <p class="prog-desc">Programme personnalisé à distance. Entraînement, conseils nutrition, check-in hebdomadaire et ajustements mensuels pour progresser à ton rythme.</p>
-            <div class="prog-tags">
-              <span class="prog-tag">12 semaines</span>
-              <span class="prog-tag">À distance</span>
-              <span class="prog-tag">Tous niveaux</span>
+        <!-- Slide 01 -->
+        <div class="prog-slide">
+          <div class="prog-item">
+            <div class="prog-num">01</div>
+            <div class="prog-name">Online<br/>Bien-Être</div>
+            <div class="prog-divider"></div>
+            <div class="prog-details">
+              <p class="prog-desc">Programme personnalisé à distance. Entraînement, conseils nutrition, check-in hebdomadaire et ajustements mensuels pour progresser à ton rythme.</p>
+              <div class="prog-tags">
+                <span class="prog-tag">12 semaines</span>
+                <span class="prog-tag">À distance</span>
+                <span class="prog-tag">Tous niveaux</span>
+              </div>
             </div>
+            <div class="prog-price">149€<span>/ mois</span></div>
           </div>
-          <div class="prog-price">149€<span>/ mois</span></div>
         </div>
 
-        <div class="prog-item">
-          <div class="prog-num">02</div>
-          <div class="prog-name">Coaching<br/>Hybride</div>
-          <div class="prog-divider"></div>
-          <div class="prog-details">
-            <p class="prog-desc">2 séances mensuelles en présentiel + suivi complet en ligne. Muscle, souplesse et bien-être travaillés ensemble, avec un bilan mensuel approfondi.</p>
-            <div class="prog-tags">
-              <span class="prog-tag">Présentiel + online</span>
-              <span class="prog-tag">Bilan mensuel</span>
+        <!-- Slide 02 -->
+        <div class="prog-slide">
+          <div class="prog-item">
+            <div class="prog-num">02</div>
+            <div class="prog-name">Coaching<br/>Hybride</div>
+            <div class="prog-divider"></div>
+            <div class="prog-details">
+              <p class="prog-desc">2 séances mensuelles en présentiel + suivi complet en ligne. Muscle, souplesse et bien-être travaillés ensemble, avec un bilan mensuel approfondi.</p>
+              <div class="prog-tags">
+                <span class="prog-tag">Présentiel + online</span>
+                <span class="prog-tag">Bilan mensuel</span>
+              </div>
             </div>
+            <div class="prog-price">290€<span>/ mois</span></div>
           </div>
-          <div class="prog-price">290€<span>/ mois</span></div>
         </div>
 
-        <div class="prog-item">
-          <div class="prog-num">03</div>
-          <div class="prog-name">Coaching<br/>Premium</div>
-          <div class="prog-divider"></div>
-          <div class="prog-details">
-            <p class="prog-desc">Accompagnement complet illimité. Séances hebdomadaires, nutrition, sommeil, récupération, analyse vidéo. Pour ceux qui veulent tout transformer — corps et habitudes de vie.</p>
-            <div class="prog-tags">
-              <span class="prog-tag">Illimité</span>
-              <span class="prog-tag">Nutrition incluse</span>
-              <span class="prog-tag">Suivi bien-être</span>
+        <!-- Slide 03 -->
+        <div class="prog-slide">
+          <div class="prog-item">
+            <div class="prog-num">03</div>
+            <div class="prog-name">Coaching<br/>Premium</div>
+            <div class="prog-divider"></div>
+            <div class="prog-details">
+              <p class="prog-desc">Accompagnement complet illimité. Séances hebdomadaires, nutrition, sommeil, récupération, analyse vidéo. Pour ceux qui veulent tout transformer — corps et habitudes de vie.</p>
+              <div class="prog-tags">
+                <span class="prog-tag">Illimité</span>
+                <span class="prog-tag">Nutrition incluse</span>
+                <span class="prog-tag">Suivi bien-être</span>
+              </div>
             </div>
+            <div class="prog-price">490€<span>/ mois</span></div>
           </div>
-          <div class="prog-price">490€<span>/ mois</span></div>
         </div>
 
       </div>
     </div>
+
+    <!-- Points de navigation (desktop) -->
+    <div class="prog-nav" id="progNav">
+      <div class="prog-dot active" data-index="0"></div>
+      <div class="prog-dot" data-index="1"></div>
+      <div class="prog-dot" data-index="2"></div>
+    </div>
+
   </section>
 
   <!-- ══════ PHOTO PLEINE LARGEUR ══════ -->
@@ -1329,12 +1550,13 @@
     /* ── Split lettres hero ── */
     function splitLetters(sel, word) {
       const el = document.querySelector(sel);
+      if (!el) return;
       el.innerHTML = word.split('').map(ch =>
-        `<span class="char" style="opacity:0;transform:translateY(80px) skewY(6deg);display:inline-block;">${ch}</span>`
+        `<span class="char" style="opacity:0;transform:translateY(70px);display:inline-block;">${ch === ' ' ? '&nbsp;' : ch}</span>`
       ).join('');
     }
-    splitLetters('.iron-word', 'IRON');
-    splitLetters('.forge-word', 'FORGE');
+    splitLetters('.sante-word', 'SANTÉ');
+    splitLetters('.bienetre-word', 'BIEN-ÊTRE');
 
     /* ── Entry timeline hero ── */
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -1342,27 +1564,27 @@
     tl.to('.scan-line', { opacity: 1, y: '100vh', duration: 0.65, ease: 'power2.in' })
       .set('.scan-line', { opacity: 0 })
       .fromTo('.island-wrapper',
-        { opacity: 0, scale: 1.1 },
+        { opacity: 0, scale: 1.06 },
         { opacity: 1, scale: 1, duration: 1.4, ease: 'power2.out' }, '-=0.1')
       .to('.hero-line', { opacity: 1, duration: 0.5 }, '-=1.0')
-      .to('.corner',   { opacity: 1, duration: 0.4, stagger: 0.08 }, '-=0.8')
+      .to('.corner',    { opacity: 1, duration: 0.4, stagger: 0.08 }, '-=0.8')
       .fromTo('.meta-top',
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.7 }, '-=0.7')
       .to('.hero-title', { opacity: 1, duration: 0.01 }, '-=0.5')
-      .to('.iron-word .char', {
-        opacity: 1, y: 0, skewY: 0,
-        duration: 0.65, stagger: 0.07, ease: 'back.out(1.5)',
+      .to('.sante-word .char', {
+        opacity: 1, y: 0,
+        duration: 0.55, stagger: 0.07, ease: 'power2.out',
       }, '-=0.3')
-      .to('.forge-word .char', {
-        opacity: 1, y: 0, skewY: 0,
-        duration: 0.65, stagger: 0.07, ease: 'back.out(1.5)',
-      }, '-=0.38')
+      .to('.bienetre-word .char', {
+        opacity: 1, y: 0,
+        duration: 0.55, stagger: 0.05, ease: 'power2.out',
+      }, '-=0.35')
       .fromTo('.meta-bottom',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.7 }, '-=0.5');
 
-    /* ── Parallax hero — cible video et img ── */
+    /* ── Parallax hero ── */
     gsap.to('.hero-title', {
       yPercent: -170, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
@@ -1371,8 +1593,7 @@
       yPercent: 18, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
     });
-    /* Cible video OU img selon ce qui est présent dans le wrapper */
-    gsap.to('.island-wrapper video, .island-wrapper img', {
+    gsap.to('.island-wrapper img', {
       scale: 1.12, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
     });
@@ -1386,12 +1607,63 @@
     });
 
     /* ── Barre intro ── */
-    gsap.to('.s-intro::before', {
-      scaleX: 1, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '.s-intro', start: 'top 90%', toggleActions: 'play none none reverse' }
+    gsap.to('.s-intro', {
+      scrollTrigger: {
+        trigger: '.s-intro', start: 'top 90%',
+        onEnter: () => document.querySelector('.s-intro').style.setProperty('--bar-scale', '1'),
+      }
+    });
+    gsap.fromTo('.s-intro::before',
+      { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: '.s-intro', start: 'top 90%', toggleActions: 'play none none reverse' }
+      }
+    );
+
+    /* ── Intro — headline lignes ── */
+    gsap.to('.ih-line-1', {
+      opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '.intro-headline', start: 'top 82%', toggleActions: 'play none none reverse' }
+    });
+    gsap.to('.ih-line-2', {
+      opacity: 1, x: 0, duration: 0.9, delay: 0.18, ease: 'power3.out',
+      scrollTrigger: { trigger: '.intro-headline', start: 'top 82%', toggleActions: 'play none none reverse' }
+    });
+    gsap.to('.ih-line-3', {
+      opacity: 1, x: 0, duration: 1, delay: 0.32, ease: 'power3.out',
+      scrollTrigger: { trigger: '.intro-headline', start: 'top 82%', toggleActions: 'play none none reverse' }
     });
 
-    /* ── Helper scroll reveal ── */
+    /* ── Intro — colonne dark ── */
+    gsap.fromTo('.intro-feature-stat',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: '.intro-content-col', start: 'top 82%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.intro-content-col .body-text',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: 'power2.out',
+        scrollTrigger: { trigger: '.intro-content-col', start: 'top 82%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.intro-content-col .btn-primary',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, delay: 0.3, ease: 'power2.out',
+        scrollTrigger: { trigger: '.intro-content-col', start: 'top 82%', toggleActions: 'play none none reverse' }
+      }
+    );
+
+    /* ── Intro — stats band ── */
+    gsap.utils.toArray('.isb-item').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: '.intro-stats-band', start: 'top 88%', toggleActions: 'play none none reverse' }
+        }
+      );
+    });
+
+    /* ── Helper scroll reveal (sections suivantes) ── */
     function reveal(sel, vars, st) {
       gsap.fromTo(sel,
         { opacity: 0, ...vars.from },
@@ -1405,25 +1677,10 @@
       );
     }
 
-    reveal('.eyebrow',         { from: { y: 24, letterSpacing: '0.55em' }, to: { y: 0, letterSpacing: '0.32em', duration: 0.8 } }, {});
-    reveal('.h2-display',      { from: { y: 55, skewY: 2 }, to: { y: 0, skewY: 0, duration: 1, delay: 0.1 } }, {});
-    reveal('.body-text',       { from: { y: 28 }, to: { y: 0, duration: 0.8, delay: 0.2 } }, {});
-    reveal('.btn-primary',     { from: { y: 20 }, to: { y: 0, duration: 0.7, delay: 0.35 } }, {});
-    reveal('.intro-quote',     { from: { x: -25 }, to: { x: 0, duration: 0.85 } }, { trigger: '.intro-quote' });
+    reveal('.eyebrow',     { from: { y: 20 }, to: { y: 0, duration: 0.7 } }, {});
+    reveal('.h2-display',  { from: { y: 50, skewY: 2 }, to: { y: 0, skewY: 0, duration: 1, delay: 0.1 } }, {});
 
-    /* Stats barres */
-    ScrollTrigger.create({
-      trigger: '.stat-grid',
-      start: 'top 84%',
-      onEnter: () => {
-        document.querySelectorAll('.stat-item').forEach((el, i) => {
-          gsap.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: 'power2.out' });
-          setTimeout(() => el.classList.add('in-view'), 400 + i * 100);
-        });
-      }
-    });
-
-    /* Méthode items */
+    /* Méthode */
     gsap.utils.toArray('.method-item').forEach((el, i) => {
       gsap.fromTo(el,
         { opacity: 0, x: -30 },
@@ -1452,14 +1709,55 @@
       }
     );
 
-    /* ── Programmes — simple reveal en grille (plus de pin GSAP) ── */
-    gsap.utils.toArray('.prog-item').forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 32 },
-        { opacity: 1, y: 0, duration: 0.7, delay: i * 0.14, ease: 'power2.out',
-          scrollTrigger: { trigger: '.s-programs', start: 'top 75%', toggleActions: 'play none none reverse' }
+    /* ══════════════════════════════════════
+       PROGRAMMES — SCROLL HORIZONTAL (desktop)
+       · pin de .s-programs
+       · translation du .prog-track de 0 → -200vw
+       · mise à jour des dots
+    ══════════════════════════════════════ */
+    ScrollTrigger.matchMedia({
+      "(min-width: 901px)": function () {
+        const progTrack = document.querySelector('.prog-track');
+        const progNav   = document.getElementById('progNav');
+        const dots      = progNav ? progNav.querySelectorAll('.prog-dot') : [];
+        const numSlides = 3;
+        const slideW    = () => window.innerWidth;
+        const totalDist = () => slideW() * (numSlides - 1); // 2 × 100vw
+
+        /* Mise à jour des dots selon la progression */
+        function updateDots(progress) {
+          const idx = Math.round(progress * (numSlides - 1));
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         }
-      );
+
+        gsap.to(progTrack, {
+          x: () => -totalDist(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.s-programs',
+            start: 'top top',
+            end: () => `+=${totalDist()}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => updateDots(self.progress),
+          }
+        });
+      }
+    });
+
+    /* ── Programmes mobile — reveal vertical ── */
+    ScrollTrigger.matchMedia({
+      "(max-width: 900px)": function () {
+        gsap.utils.toArray('.prog-item').forEach((el, i) => {
+          gsap.fromTo(el,
+            { opacity: 0, y: 28 },
+            { opacity: 1, y: 0, duration: 0.65, delay: i * 0.12, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' }
+            }
+          );
+        });
+      }
     });
 
     /* Photo pleine largeur parallax */
@@ -1491,4 +1789,4 @@
     });
   </script>
 </body>
-</html>
+</html> 
